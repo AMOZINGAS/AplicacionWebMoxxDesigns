@@ -2,32 +2,66 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package itson.mx.moxxdesignsdominio;
+package itson.mx.moxxdesignsdominio.entidades;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 /**
  *
  * @author olive
  */
 @Entity
-public class Pedido implements Serializable {
+public class CarritoCompras implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
+    @ManyToMany
+    @JoinTable(
+        name = "carrito_productos",
+        joinColumns = @JoinColumn(name = "carrito_id"),
+        inverseJoinColumns = @JoinColumn(name = "producto_id")
+    )
+    private List<Producto> productos ;
 
+    public CarritoCompras() {
+        this.productos = new ArrayList() ;
+    }
+
+    public CarritoCompras(Long id, List<Producto> productos) {
+        this.id = id;
+        this.productos = productos;
+    }
+
+    public CarritoCompras(List<Producto> productos) {
+        this.productos = productos;
+    }
+    
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public List<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
     }
 
     @Override
@@ -40,10 +74,10 @@ public class Pedido implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Pedido)) {
+        if (!(object instanceof CarritoCompras)) {
             return false;
         }
-        Pedido other = (Pedido) object;
+        CarritoCompras other = (CarritoCompras) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -52,7 +86,7 @@ public class Pedido implements Serializable {
 
     @Override
     public String toString() {
-        return "itson.mx.moxxdesignsdominio.Pedido[ id=" + id + " ]";
+        return "itson.mx.moxxdesignsdominio.entidades.CarritoCompras[ id=" + id + " ]";
     }
     
 }

@@ -4,10 +4,26 @@
  */
 package itson.mx.moxxdesignspersistencia.daos;
 
+import itson.mx.moxxdesignsdominio.entidades.Pedido;
+import itson.mx.moxxdesignsdominio.entidades.Usuario;
+import itson.mx.moxxdesignsexcepciones.PersistenciaException;
+import itson.mx.moxxdesignspersistencia.interfaces.IPedidosDAO;
+import java.util.List;
+
 /**
  *
  * @author olive
  */
-public class PedidosDAO {
+public class PedidosDAO implements IPedidosDAO {
+
+    @Override
+    public void crearPedido(Pedido pedido) throws PersistenciaException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Pedido> obtenerPedidosDeUsuario(Usuario usuario) throws PersistenciaException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }

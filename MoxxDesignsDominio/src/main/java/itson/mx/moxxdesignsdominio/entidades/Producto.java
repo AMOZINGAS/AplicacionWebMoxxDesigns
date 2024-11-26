@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package itson.mx.moxxdesignsdominio;
+package itson.mx.moxxdesignsdominio.entidades;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
@@ -15,13 +15,15 @@ import javax.persistence.Id;
  * @author olive
  */
 @Entity
-public class Usuario implements Serializable {
+public class Producto implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    public Producto() {}
+    
     public Long getId() {
         return id;
     }
@@ -40,10 +42,10 @@ public class Usuario implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Usuario)) {
+        if (!(object instanceof Producto)) {
             return false;
         }
-        Usuario other = (Usuario) object;
+        Producto other = (Producto) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -52,7 +54,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "itson.mx.moxxdesignsdominio.Usuario[ id=" + id + " ]";
+        return "itson.mx.moxxdesignsdominio.Producto[ id=" + id + " ]";
     }
     
 }

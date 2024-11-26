@@ -4,28 +4,35 @@
  */
 package itson.mx.moxxdesignspersistencia.daos;
 
+import itson.mx.moxxdesignsdominio.entidades.CarritoCompras;
+import itson.mx.moxxdesignsdominio.entidades.Producto;
 import itson.mx.moxxdesignsdominio.entidades.Usuario;
 import itson.mx.moxxdesignsexcepciones.PersistenciaException;
-import itson.mx.moxxdesignspersistencia.interfaces.IUsuariosDAO;
+import itson.mx.moxxdesignspersistencia.interfaces.ICarritoComprasDAO;
 
 /**
  *
  * @author olive
  */
-public class UsuariosDAO implements IUsuariosDAO {
+public class CarritoComprasDAO implements ICarritoComprasDAO {
 
     @Override
-    public void crearUsuario(Usuario usuario) throws PersistenciaException {
+    public CarritoCompras obtenerCarritoDeComprasDeUsuario(Usuario usuario) throws PersistenciaException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void autenticarUsuario(String email, String password) throws PersistenciaException {
+    public void agregarProductoACarritoDeCompras(CarritoCompras carritoCompras) throws PersistenciaException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void obtenerUsuarioPorEmail(String email) throws PersistenciaException {
+    public void eliminarProductoDeCarritoDeCompras(CarritoCompras carritoCompras, Producto producto) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void eliminarTodosLosProductosDeCarritoDeCompras(CarritoCompras carritoCompras) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     

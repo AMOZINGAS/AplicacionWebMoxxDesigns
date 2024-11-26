@@ -4,10 +4,12 @@
  */
 package itson.mx.moxxdesignsnegocios.bo;
 
+import itson.mx.moxxdesignsnegocios.interfaces.IPedidosBO;
+
 /**
  *
  * @author olive
  */
-public class PedidosBO {
+public class PedidosBO implements IPedidosBO {
     
 }

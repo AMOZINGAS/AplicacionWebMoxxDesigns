@@ -4,10 +4,19 @@
  */
 package itson.mx.moxxdesignspersistencia.daos;
 
+import itson.mx.moxxdesignsdominio.entidades.Producto;
+import itson.mx.moxxdesignspersistencia.interfaces.IProductosDAO;
+import java.util.List;
+
 /**
  *
  * @author olive
  */
-public class ProductosDAO {
+public class ProductosDAO implements IProductosDAO {
+
+    @Override
+    public List<Producto> obtenerTodosLosProductos() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }

@@ -4,12 +4,12 @@
  */
 package itson.mx.moxxdesignsnegocios.bo;
 
-import itson.mx.moxxdesignsnegocios.interfaces.IProductosBO;
+import itson.mx.moxxdesignsnegocios.interfaces.ICarritoComprasBO;
 
 /**
  *
  * @author olive
  */
-public class ProductosBO implements IProductosBO {
+public class CarritoComprasBO implements ICarritoComprasBO {
     
 }

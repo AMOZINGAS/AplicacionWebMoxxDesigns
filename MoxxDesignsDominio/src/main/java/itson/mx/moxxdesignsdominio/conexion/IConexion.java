@@ -2,17 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package itson.mx.moxxdesignspersistencia.interfaces;
+package itson.mx.moxxdesignsdominio.conexion;
 
-import itson.mx.moxxdesignsdominio.entidades.Producto;
-import java.util.List;
+import javax.persistence.EntityManager;
 
 /**
  *
  * @author olive
  */
-public interface IProductosDAO {
+public interface IConexion {
     
-    public List<Producto> obtenerTodosLosProductos() ;
+    public EntityManager crearConexion() ;
     
 }
