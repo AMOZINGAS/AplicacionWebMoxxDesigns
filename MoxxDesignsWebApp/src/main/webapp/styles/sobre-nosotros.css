@@ -1,0 +1,106 @@
+:root {
+    --primary-blue: #1d04f4;
+    --dark-blue: #08045f;
+    --yellow: #f9f95f;
+    --black: #040404;
+    --white: #ffffff;
+}
+
+/* Navbar styles from your CSS */
+.navbar {
+    background-color: var(--dark-blue);
+    padding: 1rem;
+}
+
+.navbar-brand {
+    color: var(--yellow) !important;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    color: var(--white) !important;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--yellow) !important;
+}
+
+.navbar-toggler {
+    border-color: var(--yellow);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='rgba(249, 249, 95, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>");
+}
+
+/* About Us specific styles */
+.about-header {
+    background-color: var(--black);
+    color: var(--white);
+    padding: 6rem 0;
+    margin-top: 76px;
+    position: relative;
+}
+
+.about-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, var(--dark-blue) 0%, transparent 100%);
+    opacity: 0.7;
+}
+
+.team-card {
+    background: var(--white);
+    border: none;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+    margin-bottom: 2rem;
+    overflow: hidden;
+}
+
+.team-card:hover {
+    transform: translateY(-10px);
+}
+
+.timeline {
+    position: relative;
+    padding: 2rem 0;
+}
+
+.timeline-item {
+    padding: 2rem;
+    margin: 2rem 0;
+    border-left: 4px solid var(--primary-blue);
+    background-color: #f8f9fa;
+    position: relative;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: var(--primary-blue);
+    border-radius: 50%;
+    left: -12px;
+    top: 2rem;
+}
+
+.value-card {
+    background-color: #f8f9fa;
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    border-bottom: 4px solid var(--primary-blue);
+}
+
+.value-icon {
+    font-size: 2.5rem;
+    color: var(--primary-blue);
+    margin-bottom: 1rem;
+}

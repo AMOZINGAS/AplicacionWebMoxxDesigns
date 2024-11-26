@@ -1,0 +1,1 @@
+const prueba = document.getElementById("hola") ;

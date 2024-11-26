@@ -1,0 +1,93 @@
+:root {
+    --primary-blue: #1d04f4;
+    --dark-blue: #08045f;
+    --yellow: #f9f95f;
+    --black: #040404;
+    --white: #ffffff;
+}
+
+.navbar {
+    background-color: var(--dark-blue);
+    padding: 1rem;
+}
+
+.navbar-brand {
+    color: var(--yellow) !important;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    color: var(--white) !important;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--yellow) !important;
+}
+
+.navbar-toggler {
+    border-color: var(--yellow);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='rgba(249, 249, 95, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>");
+}
+
+.hero-section {
+    background-color: var(--black);
+    color: var(--white);
+    padding: 6rem 0;
+    position: relative;
+}
+
+.hero-text {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, var(--dark-blue) 0%, transparent 100%);
+    opacity: 0.7;
+}
+
+.feature-card {
+    background: var(--white);
+    border: none;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+    margin-bottom: 2rem;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+}
+
+.feature-icon {
+    font-size: 2rem;
+    color: var(--primary-blue);
+    margin-bottom: 1rem;
+}
+
+.btn-primary-custom {
+    background-color: var(--primary-blue);
+    border: none;
+    color: var(--white);
+    padding: 0.5rem 2rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary-custom:hover {
+    background-color: var(--dark-blue);
+    color: var(--yellow);
+}
+
+.card-img-custom {
+    height: 200px;
+    object-fit: cover;
+}

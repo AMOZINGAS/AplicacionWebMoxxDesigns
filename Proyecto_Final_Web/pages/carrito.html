@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras - Empresa XYZ</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="../styles/footer.css" rel="stylesheet">
+    <link href="../styles/carrito.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">EMPRESA XYZ</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="proyectos.html">Proyectos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cotizacion.html">Cotización</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="sobre-nosotros.html">Sobre Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contactanos.html">Contáctanos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="carrito.html">🛒 Carrito</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Cart Header -->
+    <header class="cart-header">
+        <div class="cart-overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 position-relative">
+                    <h1 class="display-4 mb-4">Tu Carrito</h1>
+                    <p class="lead">Revisa y modifica los productos seleccionados.</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Cart Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <!-- Cart Items -->
+                <div class="col-lg-8" id="cartItems">
+                    <!-- Los items del carrito se cargarán dinámicamente aquí -->
+                </div>
+
+                <!-- Cart Summary -->
+                <div class="col-lg-4">
+                    <div class="cart-summary">
+                        <h4 class="mb-4">Resumen de compra</h4>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Subtotal</span>
+                            <span id="subtotal">$0.00</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>IVA (16%)</span>
+                            <span id="tax">$0.00</span>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between mb-4">
+                            <strong>Total</strong>
+                            <strong id="total">$0.00</strong>
+                        </div>
+                        <button class="btn btn-checkout" onclick="checkout()">Proceder al pago</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5>Ubicación</h5>
+                    <p>
+                        <i class="fas fa-map-marker-alt me-2"></i>
+                        Av. Principal #123<br>
+                        Ciudad Ejemplo, CP 12345
+                    </p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Contacto</h5>
+                    <p>
+                        <i class="fas fa-phone me-2"></i>
+                        +1 234 567 8900<br>
+                        <i class="fas fa-envelope me-2"></i>
+                        contacto@empresaxyz.com
+                    </p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Síguenos</h5>
+                    <div class="social-icons">
+                        <a href="https://facebook.com" target="_blank" class="me-3">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://youtube.com" target="_blank">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 text-center mt-3">
+                    <p class="mb-0">&copy; 2024 Empresa XYZ. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Simulación de productos en el carrito
+        let cartProducts = [
+            {
+                id: 1,
+                name: "Producto 1",
+                price: 599.99,
+                quantity: 1,
+                image: "/api/placeholder/100/100"
+            },
+            {
+                id: 2,
+                name: "Producto 2",
+                price: 299.99,
+                quantity: 2,
+                image: "/api/placeholder/100/100"
+            }
+        ];
+
+        // Función para renderizar los productos del carrito
+        function renderCart() {
+            const cartContainer = document.getElementById('cartItems');
+
+            if (cartProducts.length === 0) {
+                cartContainer.innerHTML = `
+                    <div class="empty-cart">
+                        <div class="empty-cart-icon">🛒</div>
+                        <h3>Tu carrito está vacío</h3>
+                        <p>¡Agrega algunos productos desde nuestra sección de cotización!</p>
+                        <a href="cotizacion.html" class="btn btn-checkout mt-3">Ir a Cotización</a>
+                    </div>
+                `;
+                updateTotals();
+                return;
+            }
+
+            cartContainer.innerHTML = cartProducts.map(product => `
+                <div class="cart-item">
+                    <div class="row align-items-center">
+                        <div class="col-md-2">
+                            <img src="${product.image}" alt="${product.name}" class="img-fluid">
+                        </div>
+                        <div class="col-md-4">
+                            <h5>${product.name}</h5>
+                            <p class="text-muted mb-0">Precio unitario: $${product.price.toFixed(2)}</p>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="d-flex align-items-center">
+                                <button class="btn-quantity" onclick="updateQuantity(${product.id}, -1)">-</button>
+                                <input type="number" class="quantity-input" value="${product.quantity}" 
+                                    onchange="updateQuantityDirect(${product.id}, this.value)">
+                                <button class="btn-quantity" onclick="updateQuantity(${product.id}, 1)">+</button>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <strong>$${(product.price * product.quantity).toFixed(2)}</strong>
+                        </div>
+                        <div class="col-md-1">
+                            <button class="btn-remove" onclick="removeProduct(${product.id})">🗑️</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            updateTotals();
+        }
+
+        // Función para actualizar la cantidad de un producto
+        function updateQuantity(productId, change) {
+            const product = cartProducts.find(p => p.id === productId);
+            if (product) {
+                const newQuantity = product.quantity + change;
+                if (newQuantity > 0) {
+                    product.quantity = newQuantity;
+                    renderCart();
+                }
+            }
+        }
+
+        // Función para actualizar la cantidad directamente
+        function updateQuantityDirect(productId, newValue) {
+            const product = cartProducts.find(p => p.id === productId);
+            if (product) {
+                const quantity = parseInt(newValue);
+                if (quantity > 0) {
+                    product.quantity = quantity;
+                    renderCart();
+                }
+            }
+        }
+
+        // Función para eliminar un producto
+        function removeProduct(productId) {
+            if (confirm('¿Estás seguro de que deseas eliminar este producto?')) {
+                cartProducts = cartProducts.filter(p => p.id !== productId);
+                renderCart();
+            }
+        }
+
+        // Función para actualizar los totales
+        function updateTotals() {
+            const subtotal = cartProducts.reduce((total, product) => total + (product.price * product.quantity), 0);
+            const tax = subtotal * 0.16;
+            const total = subtotal + tax;
+
+            document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById('tax').textContent = `$${tax.toFixed(2)}`;
+            document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+        }
+
+        // Función para proceder al pago
+        function checkout() {
+            if (cartProducts.length === 0) {
+                alert('Tu carrito está vacío');
+                return;
+            }
+            alert('Procediendo al pago...');
+            // Aquí iría la lógica de redirección al checkout
+        }
+
+        // Inicializar el carrito
+        renderCart();
+    </script>
+</body>
+
+</html>
