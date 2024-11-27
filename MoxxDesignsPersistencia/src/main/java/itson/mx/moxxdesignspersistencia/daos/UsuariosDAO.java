@@ -16,10 +16,20 @@ public class UsuariosDAO implements IUsuariosDAO {
 
     private final IConexion conexion;
 
+    /**
+     *
+     * @param conexion
+     */
     public UsuariosDAO(IConexion conexion) {
         this.conexion = conexion;
     }
 
+    /**
+     *
+     * @param usuario
+     * @return
+     * @throws PersistenciaException
+     */
     @Override
     public Usuario crearUsuario(Usuario usuario) throws PersistenciaException {
         EntityManager em = conexion.crearConexion();
@@ -37,6 +47,13 @@ public class UsuariosDAO implements IUsuariosDAO {
         }
     }
 
+    /**
+     *
+     * @param email
+     * @param password
+     * @return
+     * @throws PersistenciaException
+     */
     @Override
     public boolean login(String email, String password) throws PersistenciaException {
         EntityManager em = conexion.crearConexion();

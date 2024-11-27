@@ -24,26 +24,27 @@ import javax.persistence.OneToOne;
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @Column(name = "id_usuario")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @Column(name = "email", nullable = false, length = 50)
-    private String email ;
-    
+    private String email;
+
     @Column(name = "password", nullable = false, length = 50)
-    private String password ;
-    
+    private String password;
+
     @OneToMany(mappedBy = "usuario", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Pedido> pedidos;
-    
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "carrito_id", referencedColumnName = "id")
     private CarritoCompras carritoCompras;
 
-    public Usuario() {}
+    public Usuario() {
+    }
 
     public Usuario(Long id, String email, String password, List<Pedido> pedidos, CarritoCompras carritoCompras) {
         this.id = id;
@@ -52,13 +53,13 @@ public class Usuario implements Serializable {
         this.pedidos = pedidos;
         this.carritoCompras = carritoCompras;
     }
-    
+
     public Usuario(Long id, String email, String password, List<Pedido> pedidos) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.pedidos = pedidos;
-        this.carritoCompras = new CarritoCompras() ;
+        this.carritoCompras = new CarritoCompras();
     }
 
     public Usuario(String email, String password, List<Pedido> pedidos, CarritoCompras carritoCompras) {
@@ -72,14 +73,14 @@ public class Usuario implements Serializable {
         this.email = email;
         this.password = password;
         this.pedidos = pedidos;
-        this.carritoCompras = new CarritoCompras() ;
+        this.carritoCompras = new CarritoCompras();
     }
 
     public Usuario(Long id, String email, String password) {
         this.id = id;
         this.email = email;
         this.password = password;
-        this.carritoCompras = new CarritoCompras() ;
+        this.carritoCompras = new CarritoCompras();
     }
 
     public Usuario(String email, String password, CarritoCompras carritoCompras) {
@@ -87,13 +88,13 @@ public class Usuario implements Serializable {
         this.password = password;
         this.carritoCompras = carritoCompras;
     }
-    
+
     public Usuario(String email, String password) {
         this.email = email;
         this.password = password;
-        this.carritoCompras = new CarritoCompras() ;
+        this.carritoCompras = new CarritoCompras();
     }
-    
+
     public Long getId() {
         return id;
     }
@@ -126,5 +127,37 @@ public class Usuario implements Serializable {
     public String toString() {
         return "itson.mx.moxxdesignsdominio.Usuario[ id=" + id + " ]";
     }
-    
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
+
+    public CarritoCompras getCarritoCompras() {
+        return carritoCompras;
+    }
+
+    public void setCarritoCompras(CarritoCompras carritoCompras) {
+        this.carritoCompras = carritoCompras;
+    }
+
 }

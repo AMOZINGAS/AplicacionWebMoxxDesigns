@@ -17,10 +17,18 @@ public class ProductosDAO implements IProductosDAO {
 
     private final IConexion conexion;
 
+    /**
+     *
+     * @param conexion
+     */
     public ProductosDAO(IConexion conexion) {
         this.conexion = conexion;
     }
 
+    /**
+     *
+     * @return @throws PersistenciaException
+     */
     @Override
     public List<Producto> obtenerTodosLosProductos() throws PersistenciaException {
         EntityManager em = conexion.crearConexion();
