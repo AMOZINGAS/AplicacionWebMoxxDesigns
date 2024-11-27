@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package itson.mx.moxxdesignspersistencia.daos;
 
 import itson.mx.moxxdesignsdominio.conexion.Conexion;
@@ -19,37 +15,60 @@ import javax.persistence.TypedQuery;
  */
 public class UsuariosDAO implements IUsuariosDAO {
 
-    private IConexion conexion ;
-    
+    private final IConexion conexion;
+
     public UsuariosDAO(IConexion conexion) {
-        this.conexion = conexion ;
+        this.conexion = conexion;
     }
-    
+
     @Override
     public Usuario crearUsuario(Usuario usuario) throws PersistenciaException {
-        EntityManager em = conexion.crearConexion() ;
-        
-        em.getTransaction().begin();
-        em.persist(usuario);
-        em.getTransaction().commit();
-        em.close();
-        
-        return usuario ;
+        EntityManager em = conexion.crearConexion();
+
+        try {
+            em.getTransaction().begin();
+            em.persist(usuario);
+            em.getTransaction().commit();
+            return usuario;
+        } catch (Exception e) {
+            throw new PersistenciaException("Error al crear usuario: " + usuario, e);
+
+        } finally {
+            em.close();
+        }
     }
 
     @Override
     public boolean login(String email, String password) throws PersistenciaException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        EntityManager em = conexion.crearConexion();
+        try {
+            TypedQuery<Usuario> query = em.createQuery(
+                    "SELECT u FROM Usuario u WHERE u.email = :email AND u.password = :password",
+                    Usuario.class);
+            query.setParameter("email", email);
+            query.setParameter("password", password);
+
+            return !query.getResultList().isEmpty();
+        } finally {
+            em.close();
+        }
     }
 
     @Override
     public Usuario obtenerUsuarioPorEmail(String email) throws PersistenciaException {
-        EntityManager em = conexion.crearConexion() ;
-        TypedQuery<Usuario> query = em.createQuery(
-                    "SELECT u FROM Usuario u WHERE u.email = " + email + ";", Usuario.class);
-        Usuario usuario = query.getResultList().getFirst();
-        
-        return usuario ;
+        EntityManager em = conexion.crearConexion();
+        try {
+            TypedQuery<Usuario> query = em.createQuery(
+                    "SELECT u FROM Usuario u WHERE u.email = :email", Usuario.class);
+            query.setParameter("email", email);
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        } catch (Exception e) {
+            throw new PersistenciaException("Error al obtener el usuario por email UwUr: " + email, e);
+        } finally {
+            em.close();
+        }
     }
-    
+
 }
