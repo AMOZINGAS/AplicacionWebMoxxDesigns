@@ -56,7 +56,7 @@ public class CarritoComprasDAO implements ICarritoComprasDAO {
         EntityManager em = conexion.crearConexion();
         try {
             em.getTransaction().begin();
-            em.merge(carritoCompras); // Usamos merge para actualizar la entidad
+            em.merge(carritoCompras);
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
@@ -78,7 +78,7 @@ public class CarritoComprasDAO implements ICarritoComprasDAO {
         try {
             em.getTransaction().begin();
             carritoCompras.getProductos().remove(producto);
-            em.merge(carritoCompras); // Actualizamos el carrito después de remover el producto
+            em.merge(carritoCompras);
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
