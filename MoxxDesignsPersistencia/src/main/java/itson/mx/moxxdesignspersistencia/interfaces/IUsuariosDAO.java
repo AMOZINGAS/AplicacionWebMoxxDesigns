@@ -13,9 +13,9 @@ import itson.mx.moxxdesignsexcepciones.PersistenciaException;
  */
 public interface IUsuariosDAO {
     
-    public void crearUsuario(Usuario usuario) throws PersistenciaException ;
+    public Usuario crearUsuario(Usuario usuario) throws PersistenciaException ;
     
-    public void autenticarUsuario(String email, String password) throws PersistenciaException ;
+    public boolean login(String email, String password) throws PersistenciaException ;
     
-    public void obtenerUsuarioPorEmail(String email) throws PersistenciaException ;
+    public Usuario obtenerUsuarioPorEmail(String email) throws PersistenciaException ;
 }
