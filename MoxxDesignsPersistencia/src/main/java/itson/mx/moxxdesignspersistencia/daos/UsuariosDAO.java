@@ -1,12 +1,11 @@
 package itson.mx.moxxdesignspersistencia.daos;
 
-import itson.mx.moxxdesignsdominio.conexion.Conexion;
 import itson.mx.moxxdesignsdominio.conexion.IConexion;
 import itson.mx.moxxdesignsdominio.entidades.Usuario;
 import itson.mx.moxxdesignsexcepciones.PersistenciaException;
 import itson.mx.moxxdesignspersistencia.interfaces.IUsuariosDAO;
-import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 /**
