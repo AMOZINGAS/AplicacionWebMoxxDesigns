@@ -8,54 +8,19 @@ import java.util.List;
  */
 public class UsuarioDTO {
 
-    private Long id;
     private String email;
     private String password;
-    private List<PedidoDTO> pedidos;
-    private CarritoComprasDTO carritoComprasDTO;
+    private String apellido ;
+    private String nombre ;
 
     public UsuarioDTO() {
     }
 
-    public UsuarioDTO(String email, String password) {
+    public UsuarioDTO(String email, String password, String apellido, String nombre) {
         this.email = email;
         this.password = password;
-    }
-
-    public UsuarioDTO(Long id, String email, String password) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-    }
-
-    public UsuarioDTO(String email, String password, List<PedidoDTO> pedidos, CarritoComprasDTO carritoComprasDTO) {
-        this.email = email;
-        this.password = password;
-        this.pedidos = pedidos;
-        this.carritoComprasDTO = carritoComprasDTO;
-    }
-
-    public UsuarioDTO(Long id, String email, String password, List<PedidoDTO> pedidos) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.pedidos = pedidos;
-    }
-
-    public UsuarioDTO(Long id, String email, String password, List<PedidoDTO> pedidos, CarritoComprasDTO carritoComprasDTO) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.pedidos = pedidos;
-        this.carritoComprasDTO = carritoComprasDTO;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+        this.apellido = apellido ;
+        this.nombre = nombre ;
     }
 
     public String getEmail() {
@@ -74,20 +39,20 @@ public class UsuarioDTO {
         this.password = password;
     }
 
-    public List<PedidoDTO> getPedidos() {
-        return pedidos;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setPedidos(List<PedidoDTO> pedidos) {
-        this.pedidos = pedidos;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
-    public CarritoComprasDTO getCarritoComprasDTO() {
-        return carritoComprasDTO;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setCarritoComprasDTO(CarritoComprasDTO carritoComprasDTO) {
-        this.carritoComprasDTO = carritoComprasDTO;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
 }

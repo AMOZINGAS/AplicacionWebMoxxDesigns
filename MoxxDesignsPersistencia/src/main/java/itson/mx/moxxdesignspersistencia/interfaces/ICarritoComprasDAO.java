@@ -19,8 +19,10 @@ public interface ICarritoComprasDAO {
     
     public void agregarProductoACarritoDeCompras(CarritoCompras carritoCompras) throws PersistenciaException ;
     
-    public void eliminarProductoDeCarritoDeCompras(CarritoCompras carritoCompras, Producto producto) throws PersistenciaException ;
+    public void eliminarProductoDeCarritoDeCompras(CarritoCompras carritoCompras) throws PersistenciaException ;
     
     public void eliminarTodosLosProductosDeCarritoDeCompras(CarritoCompras carritoCompras) throws PersistenciaException ;
+    
+    public void crearCarritoDeCompras(CarritoCompras carritoCompras) throws PersistenciaException ;
     
 }

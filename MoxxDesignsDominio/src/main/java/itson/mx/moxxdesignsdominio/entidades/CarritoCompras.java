@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -26,33 +27,48 @@ public class CarritoCompras implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
+    
     @ManyToMany
     @JoinTable(
         name = "carrito_productos",
         joinColumns = @JoinColumn(name = "carrito_id"),
         inverseJoinColumns = @JoinColumn(name = "producto_id")
     )
-    private List<Producto> productos ;
+    private List<Producto> productos;
 
     public CarritoCompras() {
-        this.productos = new ArrayList() ;
+        this.productos = new ArrayList<>();
     }
 
-    public CarritoCompras(Long id, List<Producto> productos) {
+    public CarritoCompras(Usuario usuario) {
+        this.usuario = usuario;
+        this.productos = new ArrayList<>();
+    }
+
+    public CarritoCompras(Long id, Usuario usuario, List<Producto> productos) {
         this.id = id;
+        this.usuario = usuario;
         this.productos = productos;
     }
 
-    public CarritoCompras(List<Producto> productos) {
-        this.productos = productos;
-    }
-    
+    // Getters y setters
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public List<Producto> getProductos() {

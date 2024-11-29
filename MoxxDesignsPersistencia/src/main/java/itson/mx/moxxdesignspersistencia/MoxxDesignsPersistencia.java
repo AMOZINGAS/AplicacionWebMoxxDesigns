@@ -1,5 +1,7 @@
 package itson.mx.moxxdesignspersistencia;
 
+import itson.mx.moxxdesignsdominio.conexion.Conexion;
+
 /**
  *
  * @author olive

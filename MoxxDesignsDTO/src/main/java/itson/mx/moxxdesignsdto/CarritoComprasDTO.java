@@ -9,7 +9,6 @@ import java.util.List;
  */
 public class CarritoComprasDTO {
 
-    private Long id;
     private List<ProductoDTO> productos;
 
     public CarritoComprasDTO() {
@@ -18,19 +17,6 @@ public class CarritoComprasDTO {
 
     public CarritoComprasDTO(List<ProductoDTO> productos) {
         this.productos = productos;
-    }
-
-    public CarritoComprasDTO(Long id, List<ProductoDTO> productos) {
-        this.id = id;
-        this.productos = productos;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public List<ProductoDTO> getProductos() {

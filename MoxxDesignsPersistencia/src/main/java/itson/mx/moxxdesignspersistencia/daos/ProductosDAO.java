@@ -42,4 +42,20 @@ public class ProductosDAO implements IProductosDAO {
         }
     }
 
+    @Override
+    public Producto obtenerProductoPorId(Long id) throws PersistenciaException {
+        EntityManager em = conexion.crearConexion();
+        try {
+            Producto producto = em.find(Producto.class, id);
+            if (producto == null) {
+                throw new PersistenciaException("No se encontró un producto con el ID: " + id);
+            }
+            return producto;
+        } catch (Exception e) {
+            throw new PersistenciaException("Error al obtener el producto por ID: " + id, e);
+        } finally {
+            em.close();
+        }
+    }
+
 }

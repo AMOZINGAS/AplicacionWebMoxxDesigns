@@ -31,64 +31,36 @@ public class Usuario implements Serializable {
 
     @Column(name = "password", nullable = false, length = 50)
     private String password;
-
-    @OneToMany(mappedBy = "usuario", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    private List<Pedido> pedidos;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "carrito_id", referencedColumnName = "id")
-    private CarritoCompras carritoCompras;
+    
+    @Column(name = "apellido", nullable = false, length = 50)
+    private String apellido;
+    
+    @Column(name = "nombre", nullable = false, length = 50)
+    private String nombre;
 
     public Usuario() {
     }
 
-    public Usuario(Long id, String email, String password, List<Pedido> pedidos, CarritoCompras carritoCompras) {
+    public Usuario(Long id, String email, String password, String apellido, String nombre) {
         this.id = id;
         this.email = email;
         this.password = password;
-        this.pedidos = pedidos;
-        this.carritoCompras = carritoCompras;
+        this.apellido = apellido ;
+        this.nombre = nombre ;
     }
 
-    public Usuario(Long id, String email, String password, List<Pedido> pedidos) {
-        this.id = id;
+    public Usuario(String email, String password, String apellido, String nombre) {
         this.email = email;
         this.password = password;
-        this.pedidos = pedidos;
-        this.carritoCompras = new CarritoCompras();
+        this.apellido = apellido ;
+        this.nombre = nombre ;
     }
 
-    public Usuario(String email, String password, List<Pedido> pedidos, CarritoCompras carritoCompras) {
+    public Usuario(String email, String password, String apellido, String nombre, List<Pedido> pedidos) {
         this.email = email;
         this.password = password;
-        this.pedidos = pedidos;
-        this.carritoCompras = carritoCompras;
-    }
-
-    public Usuario(String email, String password, List<Pedido> pedidos) {
-        this.email = email;
-        this.password = password;
-        this.pedidos = pedidos;
-        this.carritoCompras = new CarritoCompras();
-    }
-
-    public Usuario(Long id, String email, String password) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.carritoCompras = new CarritoCompras();
-    }
-
-    public Usuario(String email, String password, CarritoCompras carritoCompras) {
-        this.email = email;
-        this.password = password;
-        this.carritoCompras = carritoCompras;
-    }
-
-    public Usuario(String email, String password) {
-        this.email = email;
-        this.password = password;
-        this.carritoCompras = new CarritoCompras();
+        this.apellido = apellido ;
+        this.nombre = nombre ;
     }
 
     public Long getId() {
@@ -99,6 +71,39 @@ public class Usuario implements Serializable {
         this.id = id;
     }
 
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
+    
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -122,38 +127,6 @@ public class Usuario implements Serializable {
     @Override
     public String toString() {
         return "itson.mx.moxxdesignsdominio.Usuario[ id=" + id + " ]";
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public List<Pedido> getPedidos() {
-        return pedidos;
-    }
-
-    public void setPedidos(List<Pedido> pedidos) {
-        this.pedidos = pedidos;
-    }
-
-    public CarritoCompras getCarritoCompras() {
-        return carritoCompras;
-    }
-
-    public void setCarritoCompras(CarritoCompras carritoCompras) {
-        this.carritoCompras = carritoCompras;
     }
 
 }

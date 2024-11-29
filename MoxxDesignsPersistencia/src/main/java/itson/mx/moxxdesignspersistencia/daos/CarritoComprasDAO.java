@@ -73,11 +73,10 @@ public class CarritoComprasDAO implements ICarritoComprasDAO {
      * @throws PersistenciaException
      */
     @Override
-    public void eliminarProductoDeCarritoDeCompras(CarritoCompras carritoCompras, Producto producto) throws PersistenciaException {
+    public void eliminarProductoDeCarritoDeCompras(CarritoCompras carritoCompras) throws PersistenciaException {
         EntityManager em = conexion.crearConexion();
         try {
             em.getTransaction().begin();
-            carritoCompras.getProductos().remove(producto);
             em.merge(carritoCompras);
             em.getTransaction().commit();
         } catch (Exception e) {
@@ -100,6 +99,21 @@ public class CarritoComprasDAO implements ICarritoComprasDAO {
             em.getTransaction().begin();
             carritoCompras.getProductos().clear(); // Limpiamos la lista de productos
             em.merge(carritoCompras); // Persistimos los cambios
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            throw new PersistenciaException("Error al eliminar todos los productos del carrito de compras", e);
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
+    public void crearCarritoDeCompras(CarritoCompras carritoCompras) throws PersistenciaException {
+        EntityManager em = conexion.crearConexion();
+        try {
+            em.getTransaction().begin();
+            em.persist(carritoCompras); // Persistimos los cambios
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();

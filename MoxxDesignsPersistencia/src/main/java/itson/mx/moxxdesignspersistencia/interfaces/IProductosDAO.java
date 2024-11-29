@@ -12,4 +12,5 @@ public interface IProductosDAO {
 
     public List<Producto> obtenerTodosLosProductos() throws PersistenciaException;
 
+    public Producto obtenerProductoPorId(Long id) throws PersistenciaException ;
 }

@@ -35,23 +35,28 @@ public class Producto implements Serializable {
     
     @Column(name = "imagen", length = 50, nullable = false)
     private String imagen ;
+    
+    @Column(name = "precio", nullable = false)
+    private Float precio ;
 
     public Producto() {}
 
-    public Producto(Long id, String modelo, String marca, String anio, String color, String imagen) {
+    public Producto(Long id, String modelo, String marca, String anio, String color, Float precio, String imagen) {
         this.id = id;
         this.modelo = modelo;
         this.marca = marca;
         this.anio = anio;
         this.color = color;
+        this.precio = precio ;
         this.imagen = imagen;
     }
 
-    public Producto(String modelo, String marca, String anio, String color, String imagen) {
+    public Producto(String modelo, String marca, String anio, String color, Float precio, String imagen) {
         this.modelo = modelo;
         this.marca = marca;
         this.anio = anio;
         this.color = color;
+        this.precio = precio ;
         this.imagen = imagen;
     }
     
@@ -101,6 +106,14 @@ public class Producto implements Serializable {
 
     public void setImagen(String imagen) {
         this.imagen = imagen;
+    }
+
+    public Float getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(Float precio) {
+        this.precio = precio;
     }
 
     @Override

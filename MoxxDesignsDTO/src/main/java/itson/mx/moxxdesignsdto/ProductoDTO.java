@@ -6,39 +6,42 @@ package itson.mx.moxxdesignsdto;
  */
 public class ProductoDTO {
 
-    private Long id;
+    private Long codigo;
     private String modelo;
     private String marca;
     private String anio;
     private String color;
+    private Float precio ;
     private String imagen;
 
     public ProductoDTO() {
     }
 
-    public ProductoDTO(String modelo, String marca, String anio, String color, String imagen) {
+    public ProductoDTO(String modelo, String marca, String anio, String color, Float precio, String imagen) {
         this.modelo = modelo;
         this.marca = marca;
         this.anio = anio;
         this.color = color;
+        this.precio = precio ;
         this.imagen = imagen;
     }
 
-    public ProductoDTO(Long id, String modelo, String marca, String anio, String color, String imagen) {
-        this.id = id;
+    public ProductoDTO(Long id, String modelo, String marca, String anio, String color, Float precio, String imagen) {
+        this.codigo = id;
         this.modelo = modelo;
         this.marca = marca;
         this.anio = anio;
         this.color = color;
+        this.precio = precio ;
         this.imagen = imagen;
     }
 
-    public Long getId() {
-        return id;
+    public Long getCodigo() {
+        return codigo;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setCodigo(Long id) {
+        this.codigo = id;
     }
 
     public String getModelo() {
@@ -79,6 +82,14 @@ public class ProductoDTO {
 
     public void setImagen(String imagen) {
         this.imagen = imagen;
+    }
+    
+    public Float getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(Float precio) {
+        this.precio = precio;
     }
 
 }
