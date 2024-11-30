@@ -19,6 +19,16 @@
             <version>${jakartaee}</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>MoxxDesignsGestionarUsuarios</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>MoxxDesignsGestionarCotizaciones</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
     
     <build>

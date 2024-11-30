@@ -5,7 +5,7 @@ import itson.mx.moxxdesignsdominio.entidades.Producto;
 import itson.mx.moxxdesignsdto.ProductoDTO;
 import itson.mx.moxxdesignsexcepciones.NegociosException;
 import itson.mx.moxxdesignsexcepciones.PersistenciaException;
-import itson.mx.moxxdesignsnegocios.convertor.Convertor;
+import itson.mx.moxxdesignsnegocios.utils.Convertor;
 import itson.mx.moxxdesignsnegocios.interfaces.IProductosBO;
 import itson.mx.moxxdesignspersistencia.daos.ProductosDAO;
 import java.util.List;

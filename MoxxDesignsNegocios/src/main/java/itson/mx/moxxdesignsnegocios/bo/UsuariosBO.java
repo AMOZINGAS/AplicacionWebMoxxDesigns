@@ -9,7 +9,7 @@ import itson.mx.moxxdesignsdominio.entidades.Usuario;
 import itson.mx.moxxdesignsdto.UsuarioDTO;
 import itson.mx.moxxdesignsexcepciones.NegociosException;
 import itson.mx.moxxdesignsexcepciones.PersistenciaException;
-import itson.mx.moxxdesignsnegocios.convertor.Convertor;
+import itson.mx.moxxdesignsnegocios.utils.Convertor;
 import itson.mx.moxxdesignsnegocios.interfaces.IUsuariosBO;
 import itson.mx.moxxdesignspersistencia.daos.UsuariosDAO;
 

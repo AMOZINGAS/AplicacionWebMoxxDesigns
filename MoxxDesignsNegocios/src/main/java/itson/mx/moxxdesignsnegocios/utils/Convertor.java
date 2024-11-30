@@ -2,11 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package itson.mx.moxxdesignsnegocios.convertor;
+package itson.mx.moxxdesignsnegocios.utils;
 
+import itson.mx.moxxdesignsdominio.entidades.CarritoCompras;
 import itson.mx.moxxdesignsdominio.entidades.Pedido;
 import itson.mx.moxxdesignsdominio.entidades.Producto;
 import itson.mx.moxxdesignsdominio.entidades.Usuario;
+import itson.mx.moxxdesignsdto.CarritoComprasDTO;
 import itson.mx.moxxdesignsdto.PedidoDTO;
 import itson.mx.moxxdesignsdto.ProductoDTO;
 import itson.mx.moxxdesignsdto.UsuarioDTO;
@@ -103,6 +105,16 @@ public class Convertor {
         });
         
         return dtos ;
+    }
+    
+//    public static CarritoCompras carritoCompraDtoAEntity(CarritoComprasDTO dto) {
+//        return new CarritoCompras()
+//    }
+    
+    public static CarritoComprasDTO carritoComprasEntityADto(CarritoCompras entity) {
+        return new CarritoComprasDTO(
+                listaProductosEntityADto(entity.getProductos())
+        ) ;
     }
     
     public static List<Pedido> listaPedidosDtoAEntity(List<PedidoDTO> dtos) {

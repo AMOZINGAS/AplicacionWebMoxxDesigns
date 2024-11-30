@@ -34,7 +34,7 @@ public class JwtUtil {
 
 
     // Método para validar un JWT y obtener el usuario
-    public static String validateToken(String token) throws AutenticacionException {
+    public static String getTokenData(String token) throws AutenticacionException {
         try {
             Claims claims = Jwts.parserBuilder()
                     .setSigningKey(getSigningKey())

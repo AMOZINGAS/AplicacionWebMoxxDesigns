@@ -10,7 +10,7 @@ import itson.mx.moxxdesignsdto.PedidoDTO;
 import itson.mx.moxxdesignsdto.UsuarioDTO;
 import itson.mx.moxxdesignsexcepciones.NegociosException;
 import itson.mx.moxxdesignsexcepciones.PersistenciaException;
-import itson.mx.moxxdesignsnegocios.convertor.Convertor;
+import itson.mx.moxxdesignsnegocios.utils.Convertor;
 import itson.mx.moxxdesignsnegocios.interfaces.IPedidosBO;
 import itson.mx.moxxdesignspersistencia.daos.PedidosDAO;
 import itson.mx.moxxdesignspersistencia.daos.ProductosDAO;
