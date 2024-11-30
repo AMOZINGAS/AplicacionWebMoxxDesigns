@@ -145,3 +145,20 @@
     background-color: var(--primary-blue);
     color: var(--white);
 }
+
+.site-branding img {
+    max-width: 100%;
+    height: auto;
+}
+
+@media (min-width: 768px) {
+    .site-branding img {
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 576px) {
+    .site-branding img {
+        max-width: 150px;
+    }
+}
