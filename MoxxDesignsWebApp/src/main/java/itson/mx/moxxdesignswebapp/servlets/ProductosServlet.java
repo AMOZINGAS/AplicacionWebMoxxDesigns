@@ -33,14 +33,14 @@ public class ProductosServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Obtén el parámetro "id" de la consulta
+
         String idParam = request.getParameter("id");
 
         if (idParam != null) {
-            // Llama al método para obtener el producto por ID
+
             GETObtenerProductoPorId(request, response);
         } else {
-            // Si no se proporciona un "id", devuelve todos los productos
+
             GETObtenerTodosLosProductos(request, response);
         }
     }
