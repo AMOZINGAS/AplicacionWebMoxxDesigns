@@ -4,6 +4,7 @@
  */
 package itson.mx.moxxdesignsnegocios.bo;
 
+import itson.mx.moxxdesignsdominio.conexion.Conexion;
 import itson.mx.moxxdesignsdominio.entidades.Pedido;
 import itson.mx.moxxdesignsdominio.entidades.Usuario;
 import itson.mx.moxxdesignsdto.PedidoDTO;
@@ -15,6 +16,9 @@ import itson.mx.moxxdesignsnegocios.interfaces.IPedidosBO;
 import itson.mx.moxxdesignspersistencia.daos.PedidosDAO;
 import itson.mx.moxxdesignspersistencia.daos.ProductosDAO;
 import itson.mx.moxxdesignspersistencia.daos.UsuariosDAO;
+import itson.mx.moxxdesignspersistencia.interfaces.IPedidosDAO;
+import itson.mx.moxxdesignspersistencia.interfaces.IProductosDAO;
+import itson.mx.moxxdesignspersistencia.interfaces.IUsuariosDAO;
 import java.util.List;
 
 /**
@@ -23,9 +27,15 @@ import java.util.List;
  */
 public class PedidosBO implements IPedidosBO {
 
-    private PedidosDAO pedidosDAO ;
-    private ProductosDAO productosDAO ;
-    private UsuariosDAO usuariosDAO ;
+    private IPedidosDAO pedidosDAO ;
+    private IProductosDAO productosDAO ;
+    private IUsuariosDAO usuariosDAO ;
+    
+    public PedidosBO() {
+        this.pedidosDAO = new PedidosDAO(new Conexion()) ;
+        this.productosDAO = new ProductosDAO(new Conexion()) ;
+        this.usuariosDAO = new UsuariosDAO(new Conexion()) ;
+    }
     
     @Override
     public void crearPedido(PedidoDTO pedido) throws NegociosException {

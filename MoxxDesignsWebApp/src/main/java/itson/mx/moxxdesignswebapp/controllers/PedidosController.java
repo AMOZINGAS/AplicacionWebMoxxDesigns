@@ -4,10 +4,21 @@
  */
 package itson.mx.moxxdesignswebapp.controllers;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 /**
  *
  * @author olive
  */
 public class PedidosController {
+    
+    public void POSTCrearPedido(HttpServletRequest req, HttpServletResponse res) {
+        
+    }
+    
+    public void GETObtenerPedidosDeUsuario(HttpServletRequest req, HttpServletResponse res) {
+        
+    }
     
 }

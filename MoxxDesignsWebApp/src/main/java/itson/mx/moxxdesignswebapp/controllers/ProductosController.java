@@ -4,12 +4,21 @@
  */
 package itson.mx.moxxdesignswebapp.controllers;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 /**
  *
  * @author olive
  */
 public class ProductosController {
     
+    public void GETObtenerTodosLosProductos(HttpServletRequest req, HttpServletResponse res) {
+        
+    }
     
+    public void GETObtenerProductoPorId(HttpServletRequest req, HttpServletResponse res) {
+        
+    }
     
 }

@@ -8,6 +8,7 @@ import itson.mx.moxxdesignsexcepciones.PersistenciaException;
 import itson.mx.moxxdesignsnegocios.utils.Convertor;
 import itson.mx.moxxdesignsnegocios.interfaces.IProductosBO;
 import itson.mx.moxxdesignspersistencia.daos.ProductosDAO;
+import itson.mx.moxxdesignspersistencia.interfaces.IProductosDAO;
 import java.util.List;
 
 /**
@@ -16,7 +17,7 @@ import java.util.List;
  */
 public class ProductosBO implements IProductosBO {
 
-    private final ProductosDAO productosDAO;
+    private final IProductosDAO productosDAO;
 
     public ProductosBO() {
         this.productosDAO = new ProductosDAO(new Conexion());

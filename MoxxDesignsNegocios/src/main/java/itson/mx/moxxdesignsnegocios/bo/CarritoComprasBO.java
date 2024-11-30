@@ -4,6 +4,7 @@
  */
 package itson.mx.moxxdesignsnegocios.bo;
 
+import itson.mx.moxxdesignsdominio.conexion.Conexion;
 import itson.mx.moxxdesignsdominio.entidades.CarritoCompras;
 import itson.mx.moxxdesignsdominio.entidades.Producto;
 import itson.mx.moxxdesignsdominio.entidades.Usuario;
@@ -17,6 +18,9 @@ import itson.mx.moxxdesignsnegocios.interfaces.ICarritoComprasBO;
 import itson.mx.moxxdesignspersistencia.daos.CarritoComprasDAO;
 import itson.mx.moxxdesignspersistencia.daos.ProductosDAO;
 import itson.mx.moxxdesignspersistencia.daos.UsuariosDAO;
+import itson.mx.moxxdesignspersistencia.interfaces.ICarritoComprasDAO;
+import itson.mx.moxxdesignspersistencia.interfaces.IProductosDAO;
+import itson.mx.moxxdesignspersistencia.interfaces.IUsuariosDAO;
 
 /**
  *
@@ -24,9 +28,15 @@ import itson.mx.moxxdesignspersistencia.daos.UsuariosDAO;
  */
 public class CarritoComprasBO implements ICarritoComprasBO {
 
-    private CarritoComprasDAO carritoDAO ;
-    private UsuariosDAO usuariosDAO ;
-    private ProductosDAO productosDAO ;
+    private ICarritoComprasDAO carritoDAO ;
+    private IUsuariosDAO usuariosDAO ;
+    private IProductosDAO productosDAO ;
+    
+    public CarritoComprasBO() {
+        this.carritoDAO = new CarritoComprasDAO(new Conexion()) ;
+        this.usuariosDAO = new UsuariosDAO(new Conexion()) ;
+        this.productosDAO = new ProductosDAO(new Conexion()) ;
+    }
     
     @Override
     public CarritoComprasDTO obtenerCarritoDeComprasDeUsuario(UsuarioDTO usuario) throws NegociosException {
