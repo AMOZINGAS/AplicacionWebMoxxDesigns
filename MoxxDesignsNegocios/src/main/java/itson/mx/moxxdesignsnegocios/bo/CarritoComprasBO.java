@@ -58,8 +58,8 @@ public class CarritoComprasBO implements ICarritoComprasBO {
             Producto productoDelCarrito = Convertor.productoDtoAEntity(producto) ;
             Usuario usuarioDelCarrito = usuariosDAO.obtenerUsuarioPorEmail(usuario.getEmail()) ;
             CarritoCompras carritoDelUsuario = carritoDAO.obtenerCarritoDeComprasDeUsuario(usuarioDelCarrito) ;
-            carritoDelUsuario.getProductos().add(productoDelCarrito) ;
-            carritoDAO.agregarProductoACarritoDeCompras(carritoDelUsuario);
+            carritoDelUsuario.getProductos().remove(productoDelCarrito) ;
+            carritoDAO.eliminarProductoDeCarritoDeCompras(carritoDelUsuario);
         } catch (PersistenciaException e) {
             throw new NegociosException(e.getMessage()) ;
         }
@@ -67,7 +67,12 @@ public class CarritoComprasBO implements ICarritoComprasBO {
 
     @Override
     public void eliminarTodosLosProductosDeCarritoDeCompras(UsuarioDTO usuario) throws NegociosException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            Usuario usuarioDelCarrito = usuariosDAO.obtenerUsuarioPorEmail(usuario.getEmail()) ;
+            CarritoCompras carritoDelUsuario = carritoDAO.obtenerCarritoDeComprasDeUsuario(usuarioDelCarrito) ;
+            carritoDAO.eliminarTodosLosProductosDeCarritoDeCompras(carritoDelUsuario);
+        } catch (PersistenciaException e) {
+            throw new NegociosException(e.getMessage()) ;
+        }
     }
-    
 }
