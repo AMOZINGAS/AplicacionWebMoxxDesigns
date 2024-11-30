@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  *
- * @author olive g3y
+ * @author olive
  */
 public class ProductosBO implements IProductosBO {
 
