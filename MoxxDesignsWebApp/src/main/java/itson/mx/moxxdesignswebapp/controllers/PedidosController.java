@@ -13,11 +13,11 @@ import jakarta.servlet.http.HttpServletResponse;
  */
 public class PedidosController {
     
-    public void POSTCrearPedido(HttpServletRequest req, HttpServletResponse res) {
+    public static void POSTCrearPedido(HttpServletRequest req, HttpServletResponse res) {
         
     }
     
-    public void GETObtenerPedidosDeUsuario(HttpServletRequest req, HttpServletResponse res) {
+    public static void GETObtenerPedidosDeUsuario(HttpServletRequest req, HttpServletResponse res) {
         
     }
     

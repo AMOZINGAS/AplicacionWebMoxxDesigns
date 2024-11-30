@@ -46,7 +46,18 @@ public class JwtUtil {
             throw new AutenticacionException("Autenticacion de Usuario no Valida") ;
         }
     }
-
+    
+    public static boolean isTokenValid(String token) {
+        try {
+            Jwts.parserBuilder()
+                .setSigningKey(getSigningKey())
+                .build()
+                .parseClaimsJws(token);
+            return true; // Token válido
+        } catch (Exception e) {
+            return false; // Token inválido o expirado
+        }
+    }
 
     private static Key getSigningKey() {
         byte[] secretBytes = Base64.getDecoder().decode(SECRET_KEY);

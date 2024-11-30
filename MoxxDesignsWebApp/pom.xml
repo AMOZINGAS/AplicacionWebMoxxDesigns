@@ -29,6 +29,11 @@
             <artifactId>MoxxDesignsGestionarCotizaciones</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>MoxxDesignsAutenticacion</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
     
     <build>

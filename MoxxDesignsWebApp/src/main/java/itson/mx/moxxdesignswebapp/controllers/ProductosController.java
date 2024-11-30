@@ -13,11 +13,11 @@ import jakarta.servlet.http.HttpServletResponse;
  */
 public class ProductosController {
     
-    public void GETObtenerTodosLosProductos(HttpServletRequest req, HttpServletResponse res) {
+    public static void GETObtenerTodosLosProductos(HttpServletRequest req, HttpServletResponse res) {
         
     }
     
-    public void GETObtenerProductoPorId(HttpServletRequest req, HttpServletResponse res) {
+    public static void GETObtenerProductoPorId(HttpServletRequest req, HttpServletResponse res) {
         
     }
     

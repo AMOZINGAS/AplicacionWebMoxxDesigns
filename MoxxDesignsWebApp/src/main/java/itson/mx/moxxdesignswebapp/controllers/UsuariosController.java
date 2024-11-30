@@ -4,10 +4,21 @@
  */
 package itson.mx.moxxdesignswebapp.controllers;
 
+import itson.mx.moxxdesignsgestionarusuarios.fachada.FachadaGestionarUsuarios;
+import itson.mx.moxxdesignsgestionarusuarios.fachada.IFachadaGestionarUsuarios;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 /**
  *
  * @author olive
  */
 public class UsuariosController {
+    
+    private static IFachadaGestionarUsuarios fachadaUsuarios = new FachadaGestionarUsuarios() ;
+    
+    public static void GETObtenerUsuario(HttpServletRequest req, HttpServletResponse res) {
+        
+    }
     
 }
