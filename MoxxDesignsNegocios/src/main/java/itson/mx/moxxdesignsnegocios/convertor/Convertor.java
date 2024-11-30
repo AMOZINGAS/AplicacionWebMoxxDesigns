@@ -59,6 +59,14 @@ public class Convertor {
         );
     }
     
+    public static PedidoDTO pedidoEntityADto(Pedido entity) {
+        return new PedidoDTO(
+                entity.getFecha_hora(),
+                listaProductosEntityADto(entity.getProductos()),
+                usuarioEntityADto(entity.getUsuario())
+        ) ;
+    }
+    
     public static Usuario usuarioDtoAEntity(UsuarioDTO dto) {
         return new Usuario(
                 dto.getEmail(),
@@ -92,6 +100,26 @@ public class Convertor {
         
         entitys.forEach(entity -> {
             dtos.add(productoEntityADto(entity)) ;
+        });
+        
+        return dtos ;
+    }
+    
+    public static List<Pedido> listaPedidosDtoAEntity(List<PedidoDTO> dtos) {
+        List<Pedido> entitys = new ArrayList() ;
+        
+        dtos.forEach(dto ->{
+            entitys.add(pedidoDtoAEntity(dto)) ;
+        });
+        
+        return entitys ;
+    }
+    
+    public static List<PedidoDTO> listaPedidosEntityADto(List<Pedido> entitys) {
+        List<PedidoDTO> dtos = new ArrayList() ;
+        
+        entitys.forEach(entity -> {
+            dtos.add(pedidoEntityADto(entity)) ;
         });
         
         return dtos ;
