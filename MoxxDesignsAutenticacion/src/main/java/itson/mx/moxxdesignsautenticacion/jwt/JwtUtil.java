@@ -19,8 +19,8 @@ import javax.crypto.spec.SecretKeySpec;
  */
 public class JwtUtil {
 
-    private static final String SECRET_KEY = "tuClaveSecreta";
-    private static final long EXPIRATION_TIME = 86400000;
+    private static final String SECRET_KEY = "ypuroscorridostumbadospatrinoyatelasabeseaaa";
+    private static final long EXPIRATION_TIME = 10800;
 
     // Método para generar un JWT
     public static String generateToken(String email) {

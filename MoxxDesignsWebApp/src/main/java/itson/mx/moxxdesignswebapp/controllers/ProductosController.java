@@ -4,6 +4,8 @@
  */
 package itson.mx.moxxdesignswebapp.controllers;
 
+import itson.mx.moxxdesignsgestionarcotizaciones.fachada.FachadaGestionarCotizaciones;
+import itson.mx.moxxdesignsgestionarcotizaciones.fachada.IFachadaGestionarCotizaciones;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -12,6 +14,8 @@ import jakarta.servlet.http.HttpServletResponse;
  * @author olive
  */
 public class ProductosController {
+    
+    private static IFachadaGestionarCotizaciones fachadaCotizaciones = new FachadaGestionarCotizaciones() ;
     
     public static void GETObtenerTodosLosProductos(HttpServletRequest req, HttpServletResponse res) {
         

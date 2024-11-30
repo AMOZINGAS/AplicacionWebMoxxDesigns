@@ -1,21 +1,14 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/AdvancedFilter.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Filter.java to edit this template
  */
 package itson.mx.moxxdesignswebapp.filters;
 
 import itson.mx.moxxdesignsautenticacion.jwt.JwtUtil;
-import itson.mx.moxxdesignsexcepciones.AutenticacionException;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Enumeration;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-import jakarta.servlet.DispatcherType;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.FilterConfig;
@@ -25,17 +18,15 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletRequestWrapper;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpServletResponseWrapper;
 
 /**
  *
  * @author olive
  */
-@WebFilter(filterName = "AuthFilter", urlPatterns = {"/pedido/*", "/usuario/*", "/carrito/*"})
-public class AuthFilter implements Filter {
-
+@WebFilter(filterName = "LoggedFilter", urlPatterns = {"/auth/login", "/auth/user"})
+public class LoggedFilter implements Filter {
+    
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         // Inicialización opcional
@@ -62,18 +53,18 @@ public class AuthFilter implements Filter {
             }
         }
 
-        if (token == null) {
+        if (token != null) {
             // Si no se encuentra la cookie, retornar 401
             httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            httpResponse.getWriter().write("Necesitas iniciar sesion primero");
+            httpResponse.getWriter().write("Necesitas cerrar sesión primero");
             return;
         }
 
         // Validar el token usando isTokenValid
-        if (!JwtUtil.isTokenValid(token)) {
+        if (JwtUtil.isTokenValid(token)) {
             // Si el token no es válido, retornar 401
             httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            httpResponse.getWriter().write("Tu sesion es inválida o ya expiró...");
+            httpResponse.getWriter().write("Necesitas cerrar sesión primero");
             return;
         }
 
@@ -85,4 +76,5 @@ public class AuthFilter implements Filter {
     public void destroy() {
         // Limpieza opcional
     }
+    
 }

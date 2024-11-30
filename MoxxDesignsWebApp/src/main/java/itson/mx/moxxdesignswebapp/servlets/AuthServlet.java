@@ -4,9 +4,7 @@
  */
 package itson.mx.moxxdesignswebapp.servlets;
 
-import itson.mx.moxxdesignswebapp.controllers.AuthController;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
