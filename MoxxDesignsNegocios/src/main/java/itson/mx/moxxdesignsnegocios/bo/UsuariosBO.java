@@ -46,7 +46,8 @@ public class UsuariosBO implements IUsuariosBO {
     @Override
     public boolean login(String email, String password) throws NegociosException {
         try {
-            return usuariosDAO.login(email, password);
+            String passwordEncriptada = Encrypt.encrypt(password);
+            return usuariosDAO.login(email, passwordEncriptada);
         } catch (PersistenciaException e) {
             throw new NegociosException(e.getMessage());
         }
