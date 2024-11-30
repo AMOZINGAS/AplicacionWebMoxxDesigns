@@ -11,7 +11,7 @@ public class ProductoDTO {
     private String marca;
     private String anio;
     private String color;
-    private Float precio ;
+    private Float precio;
     private String imagen;
 
     public ProductoDTO() {
@@ -22,7 +22,7 @@ public class ProductoDTO {
         this.marca = marca;
         this.anio = anio;
         this.color = color;
-        this.precio = precio ;
+        this.precio = precio;
         this.imagen = imagen;
     }
 
@@ -32,7 +32,7 @@ public class ProductoDTO {
         this.marca = marca;
         this.anio = anio;
         this.color = color;
-        this.precio = precio ;
+        this.precio = precio;
         this.imagen = imagen;
     }
 
@@ -83,7 +83,7 @@ public class ProductoDTO {
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
-    
+
     public Float getPrecio() {
         return precio;
     }
