@@ -1,28 +1,43 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package itson.mx.moxxdesignsnegocios.bo;
 
+import itson.mx.moxxdesignsdominio.conexion.Conexion;
+import itson.mx.moxxdesignsdominio.entidades.Producto;
 import itson.mx.moxxdesignsdto.ProductoDTO;
 import itson.mx.moxxdesignsexcepciones.NegociosException;
+import itson.mx.moxxdesignsexcepciones.PersistenciaException;
+import itson.mx.moxxdesignsnegocios.convertor.Convertor;
 import itson.mx.moxxdesignsnegocios.interfaces.IProductosBO;
+import itson.mx.moxxdesignspersistencia.daos.ProductosDAO;
 import java.util.List;
 
 /**
  *
- * @author olive
+ * @author olive g3y
  */
 public class ProductosBO implements IProductosBO {
 
+    private final ProductosDAO productosDAO;
+
+    public ProductosBO() {
+        this.productosDAO = new ProductosDAO(new Conexion());
+    }
+
     @Override
     public List<ProductoDTO> obtenerTodosLosProductos() throws NegociosException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            return Convertor.listaProductosEntityADto(productosDAO.obtenerTodosLosProductos());
+        } catch (PersistenciaException e) {
+            throw new NegociosException(e.getMessage());
+        }
     }
 
     @Override
     public ProductoDTO obtenerProductoPorId(Long id) throws NegociosException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            return Convertor.productoEntityADto(productosDAO.obtenerProductoPorId(id));
+        } catch (PersistenciaException e) {
+            throw new NegociosException(e.getMessage());
+        }
     }
-    
+
 }
