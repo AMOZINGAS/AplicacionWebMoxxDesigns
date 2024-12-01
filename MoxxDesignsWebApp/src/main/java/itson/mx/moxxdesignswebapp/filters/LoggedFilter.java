@@ -19,6 +19,8 @@ import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  *
@@ -39,24 +41,25 @@ public class LoggedFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
-        String token = JwtUtil.getTokenFromCookies(req.getCookies()) ;
+        String token = JwtUtil.getTokenFromCookies(req.getCookies());
 
-        if (token != null) {
-            // Si no se encuentra la cookie, retornar 401
+        if (token == null || !JwtUtil.isTokenValid(token)) {
+
+            if (token != null) {
+                for (Cookie cookie : req.getCookies()) {
+                    if ("auth_token".equals(cookie.getName())) {
+                        cookie.setValue("");
+                        cookie.setMaxAge(0);
+                        res.addCookie(cookie);
+                    }
+                }
+            }
+
             res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             res.getWriter().write("Necesitas cerrar sesión primero");
             return;
         }
 
-        // Validar el token usando isTokenValid
-        if (JwtUtil.isTokenValid(token)) {
-            // Si el token no es válido, retornar 401
-            res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            res.getWriter().write("Necesitas cerrar sesión primero");
-            return;
-        }
-
-        // Continuar con la cadena de filtros
         chain.doFilter(request, response);
     }
 
