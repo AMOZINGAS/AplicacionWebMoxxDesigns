@@ -5,18 +5,21 @@
 package itson.mx.moxxdesignswebutils.bodyparser;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.Calendar;
+import serializers.CalendarDeserializer;
 
 /**
  *
  * @author olive
  */
 public class BodyParser {
-    private static final Gson gson = new Gson();
+    private static final Gson gson = new GsonBuilder().registerTypeAdapter(Calendar.class, new CalendarDeserializer()).create();
 
     public static <T> T parseRequestBody(HttpServletRequest req, HttpServletResponse res, Class<T> clazz) throws IOException {
         StringBuilder jsonBody = new StringBuilder();

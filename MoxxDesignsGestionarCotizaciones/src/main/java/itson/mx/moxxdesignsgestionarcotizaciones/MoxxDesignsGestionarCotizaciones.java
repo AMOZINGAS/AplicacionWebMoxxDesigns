@@ -17,27 +17,27 @@ import java.util.List;
 public class MoxxDesignsGestionarCotizaciones {
 
     public static void main(String[] args) throws SubsistemaException {
-//        Float precio = 2.0f;
+        Float precio = 2.0f;
 //
-//        FachadaGestionarCotizaciones fachada = new FachadaGestionarCotizaciones();
+        FachadaGestionarCotizaciones fachada = new FachadaGestionarCotizaciones();
 //
-//        UsuarioDTO usuario = new UsuarioDTO("Olivio@gay.dick", "meLaComo", "MeLano", "Rosa");
-//        ProductoDTO producto = new ProductoDTO(
-//                "Modelo XXX",
-//                "Marca Registrada",
-//                "2030",
-//                "Color kk",
-//                precio,
-//                "Imagen");
+        UsuarioDTO usuario = new UsuarioDTO("Olivio@gay.dick", "meLaComo", "MeLano", "Rosa");
+        ProductoDTO producto = new ProductoDTO(
+                "Modelo XXX",
+                "Marca Registrada",
+                "2030",
+                "Color kk",
+                precio,
+                "Imagen");
 //
 //        try {
 //            // Obtener carro
 //            CarritoComprasDTO carrito = fachada.obtenerCarritoDeComprasDeUsuario(usuario);
 //            System.out.println("Carrito de Compras: " + carrito);
 //
-//            // Agregar producto
-//            fachada.agregarProductoACarritoDeCompras(usuario, producto);
-//            System.out.println("Producto agregado al carrito.");
+            // Agregar producto
+            fachada.agregarProductoACarritoDeCompras(usuario, producto);
+            System.out.println("Producto agregado al carrito.");
 //
 ////            // Eliminar producto
 ////            fachada.eliminarProductoDeCarritoDeCompras(usuario, producto);
@@ -70,14 +70,14 @@ public class MoxxDesignsGestionarCotizaciones {
 //            System.out.println("Error en el sistema: " + e.getMessage());
 //        }
 
-        System.out.println("HACER PEDIDO");
-        Float precio = 2.0f;
-        Long id1 = 1L;
-        Long id2 = 2L;
-        Long id3 = 3L;
-        FachadaGestionarCotizaciones fachada = new FachadaGestionarCotizaciones();
-
-        UsuarioDTO usuario = new UsuarioDTO("Olivio@gay.dick", "meLaComo", "MeLano", "Rosa");
+//        System.out.println("HACER PEDIDO");
+//        Float precio = 2.0f;
+//        Long id1 = 1L;
+//        Long id2 = 2L;
+//        Long id3 = 3L;
+//        FachadaGestionarCotizaciones fachada = new FachadaGestionarCotizaciones();
+//
+//        UsuarioDTO usuario = new UsuarioDTO("Olivio@gay.dick", "meLaComo", "MeLano", "Rosa");
 
 //        try {
 //            // Obtener carro
