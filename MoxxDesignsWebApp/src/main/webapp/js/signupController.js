@@ -29,7 +29,7 @@ function signup() {
                 icon: "success",
                 confirmButtonText: "Iniciar Sesión",
                 customClass: {
-                    confirmButton: 'bg-blue-600 text-white border border-blue-600 hover:bg-blue-700'
+                    confirmButton: 'btn btn-primary border-0'
                 }
             }).then(() => {
                 window.location.href = "/MoxxDesignsWebApp/pages/login.html";
@@ -40,13 +40,12 @@ function signup() {
             });
         }
     }).catch(err => {
-        console.error(err);
         Swal.fire({
             title: "Error de Registro",
             text: err.message || "No se pudo crear la cuenta. Intenta de nuevo.",
             icon: "error",
             customClass: {
-                confirmButton: 'bg-blue-600 text-white border border-blue-600 hover:bg-blue-700'
+                confirmButton: 'btn btn-primary border-0'
             }
         });
     });

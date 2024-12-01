@@ -32,6 +32,27 @@
 
     <script>
         const btnLogout = document.getElementById("btnLogout") ;
+
+        btnLogout.onclick = () => {
+            fetch("../auth/logout", 
+                {
+                    method: "POST"
+                }
+            ).then(response => {
+                if(response.ok) {
+                    window.location.href = "/MoxxDesignsWebApp/pages/index.html"
+                } else {
+                    Swal.fire({
+                        title: "Error",
+                        text: "Error al cerrar sesión",
+                        icon: "error",
+                        customClass: {
+                            confirmButton: 'bg-blue-600 text-white border border-blue-600 hover:bg-blue-700'
+                        }
+                    });
+                }
+            }) ;
+        }
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 </body>

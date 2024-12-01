@@ -23,7 +23,7 @@ function login() {
                 icon: "success",
                 confirmButtonText: "OK",
                 customClass: {
-                    confirmButton: 'bg-blue-600 text-white border border-blue-600 hover:bg-blue-700'
+                    confirmButton: 'btn btn-primary border-0'
                 }
             }).then(response =>{
                 window.location.href = "/MoxxDesignsWebApp/pages/index.html" ;
@@ -34,13 +34,12 @@ function login() {
             });
         }
     }).catch(err => {
-        console.log(err) ;
         Swal.fire({
             title: "Error",
             text: err.message,
             icon: "error",
             customClass: {
-                confirmButton: 'bg-blue-600 text-white border border-blue-600 hover:bg-blue-700'
+                confirmButton: 'btn btn-primary border-0'
             }
         });
     }) ;
