@@ -115,11 +115,6 @@ public class CarritoCompraController {
     }
     
     public static void DELETEEliminarTodosLosProductosDeCarritoDeCompras(HttpServletRequest req, HttpServletResponse res) {
-        try {
-            
-        } catch (IOException e) {
-            
-        }
     }
     
 }
