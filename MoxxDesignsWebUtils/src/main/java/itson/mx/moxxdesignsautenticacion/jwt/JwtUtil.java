@@ -8,6 +8,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.Claims;
 import itson.mx.moxxdesignsexcepciones.AutenticacionException;
+import jakarta.servlet.http.Cookie;
 import java.security.Key;
 import java.util.Base64;
 import java.util.Date;
@@ -45,6 +46,22 @@ public class JwtUtil {
         } catch (Exception e) {
             throw new AutenticacionException("Autenticacion de Usuario no Valida") ;
         }
+    }
+    
+    public static String getTokenFromCookies(Cookie[] cookies) {
+            String token = null;
+
+            if (cookies != null) {
+                // Buscar la cookie llamada "auth_token"
+                for (Cookie cookie : cookies) {
+                    if ("auth_token".equals(cookie.getName())) {
+                        token = cookie.getValue();
+                        break;
+                    }
+                }
+            }
+            
+            return token ;
     }
     
     public static boolean isTokenValid(String token) {

@@ -36,35 +36,23 @@ public class LoggedFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
 
-        HttpServletRequest httpRequest = (HttpServletRequest) request;
-        HttpServletResponse httpResponse = (HttpServletResponse) response;
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse res = (HttpServletResponse) response;
 
-        // Obtener las cookies de la solicitud
-        Cookie[] cookies = httpRequest.getCookies();
-        String token = null;
-
-        if (cookies != null) {
-            // Buscar la cookie llamada "auth_token"
-            for (Cookie cookie : cookies) {
-                if ("auth_token".equals(cookie.getName())) {
-                    token = cookie.getValue();
-                    break;
-                }
-            }
-        }
+        String token = JwtUtil.getTokenFromCookies(req.getCookies()) ;
 
         if (token != null) {
             // Si no se encuentra la cookie, retornar 401
-            httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            httpResponse.getWriter().write("Necesitas cerrar sesión primero");
+            res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            res.getWriter().write("Necesitas cerrar sesión primero");
             return;
         }
 
         // Validar el token usando isTokenValid
         if (JwtUtil.isTokenValid(token)) {
             // Si el token no es válido, retornar 401
-            httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            httpResponse.getWriter().write("Necesitas cerrar sesión primero");
+            res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            res.getWriter().write("Necesitas cerrar sesión primero");
             return;
         }
 

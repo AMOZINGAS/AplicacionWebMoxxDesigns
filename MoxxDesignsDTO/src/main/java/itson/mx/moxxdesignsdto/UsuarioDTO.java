@@ -22,6 +22,10 @@ public class UsuarioDTO {
         this.apellido = apellido ;
         this.nombre = nombre ;
     }
+    
+    public UsuarioDTO(String email) {
+        this.email = email;
+    }
 
     public String getEmail() {
         return email;

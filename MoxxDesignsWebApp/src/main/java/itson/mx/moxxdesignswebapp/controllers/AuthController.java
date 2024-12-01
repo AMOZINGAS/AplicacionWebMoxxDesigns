@@ -12,6 +12,7 @@ import itson.mx.moxxdesignsdto.UsuarioDTO;
 import itson.mx.moxxdesignsexcepciones.SubsistemaException;
 import itson.mx.moxxdesignsgestionarusuarios.fachada.FachadaGestionarUsuarios;
 import itson.mx.moxxdesignsgestionarusuarios.fachada.IFachadaGestionarUsuarios;
+import itson.mx.moxxdesignswebutils.bodyparser.BodyParser;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -29,20 +30,10 @@ public class AuthController {
     
     public static void POSTLogin(HttpServletRequest req, HttpServletResponse res) {
         try {
-            LoginDTO loginRequest;
-
-            // Leer el cuerpo de la solicitud
-            StringBuilder jsonBody = new StringBuilder();
-            try (BufferedReader reader = req.getReader()) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    jsonBody.append(line);
-                }
-            }
-
-            // Parsear el JSON a un objeto Java
+            LoginDTO loginRequest ;
+            
             try {
-                loginRequest = gson.fromJson(jsonBody.toString(), LoginDTO.class);
+                loginRequest = BodyParser.parseRequestBody(req, res, LoginDTO.class) ;
             } catch (JsonSyntaxException e) {
                 // Respuesta para JSON mal formado
                 res.setStatus(HttpServletResponse.SC_BAD_REQUEST);

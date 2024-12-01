@@ -31,7 +31,7 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>MoxxDesignsAutenticacion</artifactId>
+            <artifactId>MoxxDesignsWebUtils</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
