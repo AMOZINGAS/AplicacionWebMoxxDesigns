@@ -33,7 +33,7 @@ import jakarta.servlet.http.HttpServletResponseWrapper;
  *
  * @author olive
  */
-@WebFilter(filterName = "AuthFilter", urlPatterns = {"/pedido/*", "/usuario/*", "/carrito/*"})
+@WebFilter(filterName = "AuthFilter", urlPatterns = {"/pedido/*", "/usuario/*", "/carrito/*", "/pages/carrito.html"})
 public class AuthFilter implements Filter {
 
     @Override
@@ -47,11 +47,18 @@ public class AuthFilter implements Filter {
 
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
+        
+        String path = req.getRequestURI() ;
 
         String token = JwtUtil.getTokenFromCookies(req.getCookies()) ;
 
         if (token == null) {
             // Si no se encuentra la cookie, retornar 401
+            
+            if(path.endsWith("/carrito.html")) {
+                res.sendRedirect("/MoxxDesignsWebApp/pages/login-necesario.html") ;
+            }
+            
             res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             res.getWriter().write("Necesitas iniciar sesion primero");
             return;

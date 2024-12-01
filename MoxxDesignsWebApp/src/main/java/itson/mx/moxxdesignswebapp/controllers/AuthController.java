@@ -114,4 +114,27 @@ public class AuthController {
             System.out.println("Error al manejar la solicitud");
         }
     }
+    
+    public static void POSTLogout(HttpServletRequest req, HttpServletResponse res) {
+        try {
+            Cookie deleteCookie = new Cookie("auth_token", null);
+            deleteCookie.setMaxAge(0);
+            deleteCookie.setPath("/");
+
+            res.addCookie(deleteCookie);
+
+            res.setStatus(HttpServletResponse.SC_OK);
+            res.setContentType("application/json");
+            res.getWriter().write("{\"message\": \"Sesión cerrada exitosamente\"}");
+        } catch (IOException e) {
+            System.out.println("Error al cerrar sesión: " + e.getMessage());
+
+            try {
+                res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                res.getWriter().write("{\"error\": \"Error al cerrar sesión\"}");
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        }
+    }
 }

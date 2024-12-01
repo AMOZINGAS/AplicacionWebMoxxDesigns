@@ -1,0 +1,86 @@
+:root {
+    --primary-blue: #1d04f4;
+    --dark-blue: #08045f;
+    --light-blue: #5c4dff;
+    --yellow: #f9f95f;
+    --white: #ffffff;
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+.login-required-section {
+    background: linear-gradient(135deg, var(--dark-blue) 0%, var(--primary-blue) 50%, var(--light-blue) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+.login-required-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(8, 4, 95, 0.2);
+    padding: 3rem;
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+}
+
+.login-required-icon {
+    color: var(--primary-blue);
+    font-size: 6rem;
+    margin-bottom: 1.5rem;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.btn-login-required {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    border: none;
+    transition: all 0.3s ease;
+    margin: 10px;
+    padding: 12px 24px;
+    border-radius: 30px;
+}
+
+.btn-login-required:hover {
+    background-color: var(--dark-blue);
+    color: var(--yellow);
+    transform: translateY(-5px);
+}
+
+.btn-signup-required {
+    background-color: var(--light-blue);
+    color: var(--white);
+    border: none;
+    transition: all 0.3s ease;
+    margin: 10px;
+    padding: 12px 24px;
+    border-radius: 30px;
+}
+
+.btn-signup-required:hover {
+    background-color: var(--dark-blue);
+    color: var(--yellow);
+    transform: translateY(-5px);
+}
+
+h2 {
+    color: var(--dark-blue);
+    font-weight: bold;
+}
+
+.text-muted {
+    color: var(--dark-blue) !important;
+    opacity: 0.7;
+}

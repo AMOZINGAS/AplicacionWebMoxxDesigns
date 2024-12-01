@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import static itson.mx.moxxdesignswebapp.controllers.AuthController.POSTCrearUsuario;
 import static itson.mx.moxxdesignswebapp.controllers.AuthController.POSTLogin;
+import static itson.mx.moxxdesignswebapp.controllers.AuthController.POSTLogout;
 
 /**
  *
@@ -35,8 +36,10 @@ public class AuthServlet extends HttpServlet {
         
         if(path.endsWith("/login")) {
            POSTLogin(request, response);
-        } else if(path.endsWith("/user")) {
+        } else if(path.endsWith("/signup")) {
             POSTCrearUsuario(request, response);
+        } else if(path.endsWith("logout")) {
+            POSTLogout(request, response) ;
         }
     }
 
