@@ -1,7 +1,9 @@
 package itson.mx.moxxdesignswebapp.controllers;
 
 import com.google.gson.Gson;
+import itson.mx.moxxdesignsautenticacion.jwt.JwtUtil;
 import itson.mx.moxxdesignsdto.UsuarioDTO;
+import itson.mx.moxxdesignsexcepciones.AutenticacionException;
 import itson.mx.moxxdesignsexcepciones.SubsistemaException;
 import itson.mx.moxxdesignsgestionarusuarios.fachada.FachadaGestionarUsuarios;
 import itson.mx.moxxdesignsgestionarusuarios.fachada.IFachadaGestionarUsuarios;
@@ -23,36 +25,34 @@ public class UsuariosController {
     public static void GETObtenerUsuario(HttpServletRequest req, HttpServletResponse res) {
         try {
 
-            String emailReq = req.getParameter("email");
-
-            if (emailReq == null || emailReq.isEmpty()) {
-                res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                res.getWriter().write("{\"error\": \"Dame el email pa'\"}");
-                return;
-            }
-
-            UsuarioDTO usuarioDTO = fachadaUsuarios.obtenerUsuarioPorEmail(emailReq);
-
-            if (usuarioDTO == null) {
-
-                res.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                res.getWriter().write("{\"error\": \"Null my lil fam\"}");
-            } else {
-
-                String usuarioJson = gson.toJson(usuarioDTO);
-                res.setStatus(HttpServletResponse.SC_OK);
-                res.setContentType("application/json");
-                res.getWriter().write(usuarioJson);
-            }
-
-        } catch (SubsistemaException e) {
-
-            res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             try {
+                String token = JwtUtil.getTokenFromCookies(req.getCookies());
+
+                UsuarioDTO usuarioDTO = null;
+
+                String email = JwtUtil.getTokenData(token);
+
+                usuarioDTO = fachadaUsuarios.obtenerUsuarioPorEmail(email);
+
+                if (usuarioDTO == null) {
+
+                    res.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                    res.getWriter().write("{\"error\": \"Null my lil fam\"}");
+                } else {
+
+                    String usuarioJson = gson.toJson(usuarioDTO);
+                    res.setStatus(HttpServletResponse.SC_OK);
+                    res.setContentType("application/json");
+                    res.getWriter().write(usuarioJson);
+                }
+            } catch (SubsistemaException e) {
+                res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 res.getWriter().write("{\"error\": \"Not found bruh\"}");
-            } catch (IOException ex) {
-                Logger.getLogger(UsuariosController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (AutenticacionException e) {
+                res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                res.getWriter().write("{\"error\": \"Necesitas iniciar sesion\"}");
             }
+
         } catch (IOException e) {
 
             Logger.getLogger(UsuariosController.class.getName()).log(Level.SEVERE, null, e);

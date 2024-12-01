@@ -57,6 +57,7 @@ public class UsuariosBO implements IUsuariosBO {
     public UsuarioDTO obtenerUsuarioPorEmail(String email) throws NegociosException {
         try {
             Usuario usuarioObtenido = usuariosDAO.obtenerUsuarioPorEmail(email);
+            usuarioObtenido.setPassword("");
             return Convertor.usuarioEntityADto(usuarioObtenido);
         } catch (PersistenciaException e) {
             throw new NegociosException(e.getMessage());
