@@ -115,6 +115,28 @@ public class CarritoCompraController {
     }
     
     public static void DELETEEliminarTodosLosProductosDeCarritoDeCompras(HttpServletRequest req, HttpServletResponse res) {
+        try {
+           String token = JwtUtil.getTokenFromCookies(req.getCookies()) ;
+            
+            try {
+                String emailUsuario = JwtUtil.getTokenData(token) ;
+                UsuarioDTO usuario = fachadaUsuarios.obtenerUsuarioPorEmail(emailUsuario) ;
+                fachadaCotizaciones.eliminarTodosLosProductosDeCarritoDeCompras(usuario);
+                
+                res.setStatus(HttpServletResponse.SC_OK);
+                res.setContentType("application/json");
+                res.getWriter().write("Se ha eliminado el producto al carrito exitosamente");
+                
+            } catch (SubsistemaException e) {
+                res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                res.getWriter().write("{\"error\": \"Hubo un error al eliminar el producto al carrito\"}");
+            } catch (AutenticacionException e) {
+                res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                res.getWriter().write("{\"error\": \"Necesitas iniciar sesion\"}");
+            }
+        } catch (IOException e) {
+            System.out.println("Error al manejar la solicitud");
+        }
     }
     
 }

@@ -222,3 +222,10 @@
         max-width: 150px;
     }
 }
+
+.btn-add-cart.disabled {
+    background-color: #ddd;
+    color: #666;
+    cursor: not-allowed;
+  }
+  

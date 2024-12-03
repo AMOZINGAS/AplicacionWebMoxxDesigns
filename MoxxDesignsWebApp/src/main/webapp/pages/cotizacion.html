@@ -44,7 +44,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="carrito.html">
                             🛒 Carrito
-                            <span id="cart-count" class="cart-count">0</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -69,100 +68,11 @@
             <!-- Filter Section -->
             <div class="filter-section text-center">
                 <button class="category-btn active" data-category="all">Todos</button>
-                <button class="category-btn" data-category="web">Desarrollo Web</button>
-                <button class="category-btn" data-category="app">Aplicaciones</button>
-                <button class="category-btn" data-category="marketing">Marketing</button>
             </div>
 
             <!-- Products Grid -->
-            <div class="row g-4">
-                <!-- Product 1 -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="product-card">
-                        <img src="/api/placeholder/400/300" class="product-image" alt="Sitio Web Básico">
-                        <div class="product-details">
-                            <h3 class="product-title">Sitio Web Básico</h3>
-                            <p class="product-description">Sitio web responsivo de hasta 5 páginas, diseño
-                                personalizado, formulario de contacto y optimización SEO básica.</p>
-                            <div class="product-price">$999</div>
-                            <div class="quantity-control">
-                                <button class="quantity-btn" onclick="updateQuantity('product1', -1)">-</button>
-                                <span id="quantity-product1" class="quantity-display">1</span>
-                                <button class="quantity-btn" onclick="updateQuantity('product1', 1)">+</button>
-                            </div>
-                            <button class="btn-add-cart" onclick="addToCart('Sitio Web Básico', 999, 'product1')">
-                                <i class="fas fa-shopping-cart"></i>
-                                Agregar al Carrito
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 2 -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="product-card">
-                        <img src="/api/placeholder/400/300" class="product-image" alt="App Móvil">
-                        <div class="product-details">
-                            <h3 class="product-title">App Móvil Básica</h3>
-                            <p class="product-description">Aplicación móvil para iOS y Android con funcionalidades
-                                básicas, diseño intuitivo y panel de administración.</p>
-                            <div class="product-price">$2,499</div>
-                            <div class="quantity-control">
-                                <button class="quantity-btn" onclick="updateQuantity('product2', -1)">-</button>
-                                <span id="quantity-product2" class="quantity-display">1</span>
-                                <button class="quantity-btn" onclick="updateQuantity('product2', 1)">+</button>
-                            </div>
-                            <button class="btn-add-cart" onclick="addToCart('App Móvil Básica', 2499, 'product2')">
-                                <i class="fas fa-shopping-cart"></i>
-                                Agregar al Carrito
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 3 -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="product-card">
-                        <img src="/api/placeholder/400/300" class="product-image" alt="Marketing Digital">
-                        <div class="product-details">
-                            <h3 class="product-title">Plan Marketing Digital</h3>
-                            <p class="product-description">Plan mensual de marketing digital incluyendo gestión de redes
-                                sociales, SEO y publicidad en Google Ads.</p>
-                            <div class="product-price">$799</div>
-                            <div class="quantity-control">
-                                <button class="quantity-btn" onclick="updateQuantity('product3', -1)">-</button>
-                                <span id="quantity-product3" class="quantity-display">1</span>
-                                <button class="quantity-btn" onclick="updateQuantity('product3', 1)">+</button>
-                            </div>
-                            <button class="btn-add-cart" onclick="addToCart('Plan Marketing Digital', 799, 'product3')">
-                                <i class="fas fa-shopping-cart"></i>
-                                Agregar al Carrito
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 4 -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="product-card">
-                        <img src="/api/placeholder/400/300" class="product-image" alt="E-commerce">
-                        <div class="product-details">
-                            <h3 class="product-title">Tienda en Línea</h3>
-                            <p class="product-description">E-commerce completo con catálogo de productos, carrito de
-                                compras, pasarela de pagos y panel administrativo.</p>
-                            <div class="product-price">$3,999</div>
-                            <div class="quantity-control">
-                                <button class="quantity-btn" onclick="updateQuantity('product4', -1)">-</button>
-                                <span id="quantity-product4" class="quantity-display">1</span>
-                                <button class="quantity-btn" onclick="updateQuantity('product4', 1)">+</button>
-                            </div>
-                            <button class="btn-add-cart" onclick="addToCart('Tienda en Línea', 3999, 'product4')">
-                                <i class="fas fa-shopping-cart"></i>
-                                Agregar al Carrito
-                            </button>
-                        </div>
-                    </div>
-                </div>
+            <div class="row g-4" id="products-container">
+                <!-- Products from DB -->
             </div>
         </div>
     </section>
@@ -211,96 +121,10 @@
         </div>
     </footer>
 
+    <script src="../js/cotizacionController.js"></script>
+    <script src="../js/navbarController.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-    <script>
-        function updateQuantity(productId, change) {
-            let currentQuantity = quantities[productId];
-            let newQuantity = currentQuantity + change;
-
-            // Ensure quantity doesn't go below 1
-            if (newQuantity < 1) newQuantity = 1;
-            // Set a maximum of 10 items per product
-            if (newQuantity > 10) newQuantity = 10;
-
-            quantities[productId] = newQuantity;
-            document.getElementById(`quantity-${productId}`).textContent = newQuantity;
-        }
-
-        function addToCart(name, price, productId) {
-            const quantity = quantities[productId];
-            const item = {
-                id: Date.now(), // Unique ID for each cart item
-                name: name,
-                price: price,
-                quantity: quantity,
-                total: price * quantity
-            };
-
-            // Check if item already exists in cart
-            const existingItemIndex = cart.findIndex(cartItem => cartItem.name === name);
-
-            if (existingItemIndex !== -1) {
-                // Update existing item
-                cart[existingItemIndex].quantity += quantity;
-                cart[existingItemIndex].total = cart[existingItemIndex].price * cart[existingItemIndex].quantity;
-            } else {
-                // Add new item
-                cart.push(item);
-            }
-
-            // Save to localStorage
-            localStorage.setItem('cart', JSON.stringify(cart));
-
-            // Update cart count
-            updateCartCount();
-
-            // Show notification
-            showNotification(`${quantity} ${name} agregado al carrito`);
-
-            // Reset quantity to 1
-            quantities[productId] = 1;
-            document.getElementById(`quantity-${productId}`).textContent = 1;
-        }
-
-        function updateCartCount() {
-            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-            document.getElementById('cart-count').textContent = totalItems;
-        }
-
-        function showNotification(message) {
-            const notification = document.getElementById('cart-notification');
-            notification.textContent = message;
-            notification.style.display = 'block';
-            notification.style.backgroundColor = '#08045f';
-            notification.style.color = '#f9f95f';
-
-            // Hide notification after 3 seconds
-            setTimeout(() => {
-                notification.style.display = 'none';
-            }, 3000);
-        }
-
-        // Filter functionality
-        document.querySelectorAll('.category-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                // Remove active class from all buttons
-                document.querySelectorAll('.category-btn').forEach(btn => {
-                    btn.classList.remove('active');
-                });
-
-                // Add active class to clicked button
-                button.classList.add('active');
-
-                // Get category value
-                const category = button.getAttribute('data-category');
-
-                // Here you would typically filter the products
-                // For demonstration, we'll just log the category
-                console.log('Selected category:', category);
-            });
-        });
-    </script>
 </body>
 
 </html>

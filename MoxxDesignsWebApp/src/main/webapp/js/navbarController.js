@@ -78,10 +78,10 @@ function manejarInformacionUsuarioEnNavbar(usuario) {
 
 }
 
-const init = () => {
+const initNavBar = () => {
     
     getUser() ;
 
 } ;
 
-init() ;
+initNavBar() ;
