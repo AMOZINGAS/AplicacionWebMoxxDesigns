@@ -22,7 +22,7 @@ function obtenerProductos() {
         if (!productoEnCarrito) {
           productElement.innerHTML = `
           <div class="product-card">
-            <img src="https://moto.suzuki.es/assets/img/image-moto-slider-home-1.png" class="product-image" alt="${producto.modelo}">
+            <img src="${producto.imagen}" class="product-image" alt="${producto.modelo}">
             <div class="product-details">
               <h3 class="product-title">${producto.marca}</h3>
               <p class="product-description">Año: ${producto.anio}</p>
@@ -143,9 +143,8 @@ async function obtenerProductosEnCarritoDeUsuario() {
 }
 
 const init = () => {
-  obtenerProductosEnCarritoDeUsuario().then(() => {
-    obtenerProductos();
-  }) ;
+  obtenerProductosEnCarritoDeUsuario() ;
+  obtenerProductos() ;
 };
 
 init();

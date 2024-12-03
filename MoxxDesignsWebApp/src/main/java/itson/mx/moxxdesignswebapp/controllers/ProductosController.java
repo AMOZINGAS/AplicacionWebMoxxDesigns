@@ -1,13 +1,18 @@
 package itson.mx.moxxdesignswebapp.controllers;
 
 import com.google.gson.Gson;
+import itson.mx.moxxdesignsautenticacion.jwt.JwtUtil;
 import itson.mx.moxxdesignsdto.ProductoDTO;
+import itson.mx.moxxdesignsdto.UsuarioDTO;
 import itson.mx.moxxdesignsexcepciones.SubsistemaException;
 import itson.mx.moxxdesignsgestionarcotizaciones.fachada.FachadaGestionarCotizaciones;
 import itson.mx.moxxdesignsgestionarcotizaciones.fachada.IFachadaGestionarCotizaciones;
+import itson.mx.moxxdesignsgestionarusuarios.fachada.FachadaGestionarUsuarios;
+import itson.mx.moxxdesignsgestionarusuarios.fachada.IFachadaGestionarUsuarios;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,20 +24,39 @@ import java.util.logging.Logger;
 public class ProductosController {
 
     private static IFachadaGestionarCotizaciones fachadaCotizaciones = new FachadaGestionarCotizaciones();
+    private static IFachadaGestionarUsuarios fachadaUsuarios = new FachadaGestionarUsuarios();
     private static Gson gson = new Gson();
 
     public static void GETObtenerTodosLosProductos(HttpServletRequest req, HttpServletResponse res) {
         try {
 
-            List<ProductoDTO> productosDTO = fachadaCotizaciones.obtenerTodosLosProductos();
+            List<List<ProductoDTO>> productos = new ArrayList() ;
+            List<ProductoDTO> productosSistema = fachadaCotizaciones.obtenerTodosLosProductos();
 
-            if (productosDTO.isEmpty()) {
+            if (productosSistema.isEmpty()) {
                 res.setStatus(HttpServletResponse.SC_NOT_FOUND);
                 res.getWriter().write("{\"error\": \"No product found nigga\"}");
             } else {
 
-                String productosJson = gson.toJson(productosDTO);
-
+                productos.add(productosSistema) ;
+                
+                String token = JwtUtil.getTokenFromCookies(req.getCookies()) ;
+                if(JwtUtil.isTokenValid(token)) {
+                    
+                    try {
+                        String email = JwtUtil.getTokenData(token) ;
+                        UsuarioDTO usuario = fachadaUsuarios.obtenerUsuarioPorEmail(email) ;
+                        List<ProductoDTO> productosCarrito = fachadaCotizaciones.obtenerCarritoDeComprasDeUsuario(usuario).getProductos() ;
+                        
+                        productos.add(productosCarrito) ;
+                    } catch (Exception e) {
+                        System.out.println("Usuario no autenticado");
+                    }
+                    
+                }
+                
+                String productosJson = gson.toJson(productos);
+                
                 res.setStatus(HttpServletResponse.SC_OK);
                 res.setContentType("application/json");
                 res.getWriter().write(productosJson);
