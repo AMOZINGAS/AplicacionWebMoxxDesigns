@@ -33,7 +33,7 @@ import jakarta.servlet.http.HttpServletResponseWrapper;
  *
  * @author olive
  */
-@WebFilter(filterName = "AuthFilter", urlPatterns = {"/pedido/*", "/usuario/*", "/carrito/*", "/pages/carrito.html"})
+@WebFilter(filterName = "AuthFilter", urlPatterns = {"/pedido/*", "/usuario/*", "/carrito/*", "/pages/carrito.html", "/pages/ver-pedidos.html"})
 public class AuthFilter implements Filter {
 
     @Override

@@ -67,7 +67,7 @@ function manejarInformacionUsuarioEnNavbar(usuario) {
 
     cerrarSesionItem.innerHTML = `
     <button id="cerrar-sesion" class="btn btn-danger ms-2" onclick="cerrarSesion()">
-        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+        <i class="fas fa-sign-out-alt"></i>
     </button>
     `;
 
@@ -80,6 +80,21 @@ function manejarInformacionUsuarioEnNavbar(usuario) {
 
 const initNavBar = () => {
     
+    const siteBranding = document.getElementsByClassName("site-branding")[0] ;
+    
+    siteBranding.onclick = () => {
+        window.location.href = "/MoxxDesignsWebApp/pages/index.html" ;
+    } ;
+
+    siteBranding.addEventListener("mouseenter", () => {
+        siteBranding.style.cursor = "pointer";
+    });
+
+    // Opcional: Cambiar el cursor de vuelta
+    siteBranding.addEventListener("mouseleave", () => {
+        siteBranding.style.cursor = "default";
+    });
+
     getUser() ;
 
 } ;
