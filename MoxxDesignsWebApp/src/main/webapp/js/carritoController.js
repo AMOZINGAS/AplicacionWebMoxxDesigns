@@ -32,7 +32,7 @@ function obtenerProductos() {
                         </div>
                       
                         <div class="col-md-1">
-                            <button class="btn-remove" onclick="removeProduct(${product.codigo})">🗑️</button>
+                            <button class="btn-remove" onclick="eliminarProducto(${product.codigo})">🗑️</button>
                         </div>
                     </div>
           `;
@@ -40,6 +40,8 @@ function obtenerProductos() {
                 // Agregar el producto al contenedor de productos
                 cartContainer.appendChild(productElement);
             });
+
+            calcularPrecioCarrito() ;
         })
         .catch((err) => {
             Swal.fire({
@@ -53,51 +55,65 @@ function obtenerProductos() {
         });
 }
 
-function agregarAlCarrito(producto, buttonElement) {
-    console.log(producto.modelo);
-    console.log(producto.codigo);
+function eliminarProducto(codigo) {
 
-    fetch("../carrito/producto", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            codigo: producto.codigo,
-            modelo: producto.modelo,
-            marca: producto.marca,
-            anio: producto.anio,
-            color: producto.color,
-            precio: producto.precio,
-            imagen: producto.imagen
-        })
-    })
-        .then(response => {
-            if (response.ok) {
-                obtenerProductos(); // Recargar los productos
-            } else if (response.status === 401) {
+    Swal.fire({
+        title: "Eliminar Producto",
+        text: "¿Quieres eliminar el Producto?",
+        icon: "warning",
+        customClass: {
+            confirmButton: 'btn btn-primary border-0'
+        }
+    }).then(result => {
+        if (result.isConfirmed) {
+            const productoEliminar = products.find(product => product.codigo == codigo);
+
+            fetch("../carrito/producto",
+                {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        codigo: productoEliminar.codigo,
+                        modelo: productoEliminar.modelo,
+                        marca: productoEliminar.marca,
+                        anio: productoEliminar.anio,
+                        color: productoEliminar.color,
+                        precio: productoEliminar.precio,
+                        imagen: productoEliminar.imagen
+                    })
+                }
+            ).then(response => {
+                if (response.ok) {
+                    obtenerProductos() ;
+                } else {
+                    return response.text().then(error => {
+                        throw new Error(error) ;
+                    }) ;
+                }
+            }).catch(err => {
                 Swal.fire({
                     title: "Error",
-                    text: "Necesitas iniciar sesión para agregar productos al carrito",
+                    text: err.message,
                     icon: "error",
                     customClass: {
-                        confirmButton: "btn btn-primary border-0"
+                        confirmButton: 'btn btn-primary border-0'
                     }
                 });
-            } else {
-                throw new Error("Error al agregar producto");
-            }
-        })
-        .catch(err => {
-            Swal.fire({
-                title: "Error",
-                text: err.message,
-                icon: "error",
-                customClass: {
-                    confirmButton: 'btn btn-primary border-0'
-                }
-            });
-        });
+            })
+        }
+    });
+
+}
+
+function calcularPrecioCarrito() {
+    const totalLabel = document.getElementById("total") ;
+    let precioTotal = 0.0;
+    products.forEach(product => {
+        precioTotal += Number(product.precio) ;
+    }) ;
+    totalLabel.innerText = "$" + precioTotal.toFixed(2) ;
 }
 
 const init = () => {
