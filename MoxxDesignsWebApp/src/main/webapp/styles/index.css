@@ -68,6 +68,11 @@
     transform: translateY(-10px);
 }
 
+.card-img-custom:hover {
+    border: 2px solid var(--dark-blue);
+    transition: border 0.3s ease;
+}
+
 .feature-icon {
     font-size: 2rem;
     color: var(--primary-blue);
