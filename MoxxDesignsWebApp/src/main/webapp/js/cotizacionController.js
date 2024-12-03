@@ -11,7 +11,13 @@ function obtenerProductos() {
       }
     })
     .then((productos) => {
-      productos.forEach((producto) => {
+
+      if(productos[1]) 
+        userProducts = productos[1] ;
+
+      productsContainer.innerHTML = "" ;
+
+      productos[0].forEach((producto) => {
         const productElement = document.createElement("div");
         productElement.classList.add("col-md-6", "col-lg-4");
 
@@ -45,7 +51,7 @@ function obtenerProductos() {
         } else {
           productElement.innerHTML = `
           <div class="product-card">
-            <img src="https://moto.suzuki.es/assets/img/image-moto-slider-home-1.png" class="product-image" alt="${producto.modelo}">
+            <img src="${producto.imagen}" class="product-image" alt="${producto.modelo}">
             <div class="product-details">
               <h3 class="product-title">${producto.marca}</h3>
               <p class="product-description">Año: ${producto.anio}</p>
@@ -97,9 +103,7 @@ function agregarAlCarrito(producto, buttonElement) {
     }
   ).then(response => {
     if (response.ok) {
-      buttonElement.innerText = "Producto en el Carrito";
-      buttonElement.onclick = null;
-      buttonElement.classList.add("btn-add-cart", "disabled");
+      obtenerProductos() ;
     } else if (response.status = 401) {
       Swal.fire({
         title: "Error",
@@ -109,6 +113,8 @@ function agregarAlCarrito(producto, buttonElement) {
           confirmButton: "btn btn-primary border-0"
         }
       });
+    } else {
+      throw new Error("Error al agregar producto") ;
     }
   }).catch(err => {
     Swal.fire({
@@ -122,28 +128,7 @@ function agregarAlCarrito(producto, buttonElement) {
   });
 }
 
-async function obtenerProductosEnCarritoDeUsuario() {
-
-  fetch("../carrito",
-    {
-      method: "GET"
-    }
-  ).then(response => {
-    if (response.ok) {
-      return response.json();
-    } else if (response.status == 401) {
-      return;
-    }
-  }).then(products => {
-    userProducts = products;
-  }).catch(err => {
-
-  });
-
-}
-
 const init = () => {
-  obtenerProductosEnCarritoDeUsuario() ;
   obtenerProductos() ;
 };
 
