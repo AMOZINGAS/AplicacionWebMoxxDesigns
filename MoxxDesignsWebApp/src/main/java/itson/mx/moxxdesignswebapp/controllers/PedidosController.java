@@ -35,14 +35,18 @@ public class PedidosController {
 
     public static void POSTCrearPedido(HttpServletRequest req, HttpServletResponse res) {
         try {
-
             String token = JwtUtil.getTokenFromCookies(req.getCookies());
             String emailUsuario = JwtUtil.getTokenData(token);
             UsuarioDTO usuario = fachadaUsuarios.obtenerUsuarioPorEmail(emailUsuario);
+
             PedidoDTO pedidoDTO = BodyParser.parseRequestBody(req, res, PedidoDTO.class);
 
-            System.out.println("AQUI PUTAAAAAAAAAAAAAAAAAA");
-            System.out.println(pedidoDTO.getProductosDTO());
+            // Null and empty checks
+            if (pedidoDTO == null) {
+                res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                res.getWriter().write("{\"error\": \"Datos de pedido inválidos\"}");
+                return;
+            }
 
             List<ProductoDTO> productos = pedidoDTO.getProductosDTO();
             if (productos == null || productos.isEmpty()) {
@@ -61,30 +65,29 @@ public class PedidosController {
             res.getWriter().write("{\"message\": \"Pedido creado exitosamente\"}");
 
         } catch (AutenticacionException e) {
-            logger.warning("No se hace" + e.getMessage());
+            logger.warning("Autenticación fallida: " + e.getMessage());
             res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             try {
-                res.getWriter().write("{\"error\": \"Logeate krnal\"}");
+                res.getWriter().write("{\"error\": \"Autenticación requerida\"}");
             } catch (IOException ioEx) {
-                logger.severe(ioEx.getMessage());
+                logger.severe("Error al escribir respuesta de autenticación: " + ioEx.getMessage());
             }
         } catch (SubsistemaException e) {
-            logger.severe(e.getMessage());
+            logger.severe("Error en subsistema: " + e.getMessage());
             res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             try {
-                res.getWriter().write("{\"error\": \"No se pudo procesar el pedido. Intente nuevamente\"}");
+                res.getWriter().write("{\"error\": \"No se pudo procesar el pedido\"}");
             } catch (IOException ioEx) {
-                logger.severe(ioEx.getMessage());
+                logger.severe("Error al escribir respuesta de subsistema: " + ioEx.getMessage());
             }
         } catch (IOException e) {
-            logger.severe(e.getMessage());
+            logger.severe("Error de E/S: " + e.getMessage());
             try {
                 res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 res.getWriter().write("{\"error\": \"Error al procesar la solicitud\"}");
             } catch (IOException ioEx) {
-                logger.severe(ioEx.getMessage());
+                logger.severe("Error al escribir respuesta de E/S: " + ioEx.getMessage());
             }
-
         }
     }
 

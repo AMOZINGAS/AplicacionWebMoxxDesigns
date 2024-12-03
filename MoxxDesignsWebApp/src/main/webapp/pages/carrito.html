@@ -129,24 +129,9 @@
     <script src="../js/navbarController.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-    <script>
+    <!-- <script>
         // Simulación de productos en el carrito
-        let cartProducts = [
-            {
-                id: 1,
-                name: "Producto 1",
-                price: 599.99,
-                quantity: 1,
-                image: "/api/placeholder/100/100"
-            },
-            {
-                id: 2,
-                name: "Producto 2",
-                price: 299.99,
-                quantity: 2,
-                image: "/api/placeholder/100/100"
-            }
-        ];
+
 
         // Función para renderizar los productos del carrito
         function renderCart() {
@@ -154,36 +139,36 @@
 
             if (cartProducts.length === 0) {
                 cartContainer.innerHTML = `
-                    <div class="empty-cart">
-                        <div class="empty-cart-icon">🛒</div>
-                        <h3>Tu carrito está vacío</h3>
-                        <p>¡Agrega algunos productos desde nuestra sección de cotización!</p>
-                        <a href="cotizacion.html" class="btn btn-checkout mt-3">Ir a Cotización</a>
-                    </div>
-                `;
+                        <div class="empty-cart">
+                            <div class="empty-cart-icon">🛒</div>
+                            <h3>Tu carrito está vacío</h3>
+                            <p>¡Agrega algunos productos desde nuestra sección de cotización!</p>
+                            <a href="cotizacion.html" class="btn btn-checkout mt-3">Ir a Cotización</a>
+                        </div>
+                    `;
                 updateTotals();
                 return;
             }
 
             cartContainer.innerHTML = cartProducts.map(product => `
-                <div class="cart-item">
-                    <div class="row align-items-center">
-                        <div class="col-md-2">
-                            <img src="${product.image}" alt="${product.name}" class="img-fluid">
-                        </div>
-                        <div class="col-md-4">
-                            <h5>${product.name}</h5>
-                            <p class="text-muted mb-0">Precio unitario: $${product.price.toFixed(2)}</p>
-                        </div>
-                        <div class="col-md-2">
-                            <strong>$${(product.price * product.quantity).toFixed(2)}</strong>
-                        </div>
-                        <div class="col-md-1">
-                            <button class="btn-remove" onclick="removeProduct(${product.id})">🗑️</button>
+                    <div class="cart-item">
+                        <div class="row align-items-center">
+                            <div class="col-md-2">
+                                <img src="${product.image}" alt="${product.name}" class="img-fluid">
+                            </div>
+                            <div class="col-md-4">
+                                <h5>${product.name}</h5>
+                                <p class="text-muted mb-0">Precio unitario: $${product.price.toFixed(2)}</p>
+                            </div>
+                            <div class="col-md-2">
+                                <strong>$${(product.price * product.quantity).toFixed(2)}</strong>
+                            </div>
+                            <div class="col-md-1">
+                                <button class="btn-remove" onclick="removeProduct(${product.id})">🗑️</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            `).join('');
+                `).join('');
 
             updateTotals();
         }
@@ -243,7 +228,139 @@
 
         // Inicializar el carrito
         renderCart();
-    </script>
+    </script> -->
+    <!-- <script src="../js/carritoController.js"></script> -->
+
+    <!-- <script>
+        // Inicializar cartProducts como un arreglo vacío
+        var cartProducts = [];
+
+        // Función para obtener los productos del carrito desde la base de datos
+        function obtenerCarrito() {
+            fetch("../carrito", {
+                method: "GET",
+            })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error("Error al obtener el carrito");
+                    }
+                })
+                .then(data => {
+                    // Asegurarse de que 'data' sea un arreglo
+                    if (Array.isArray(data)) {
+                        cartProducts = data;  // Asignamos los productos obtenidos a cartProducts
+                    } else {
+                        cartProducts = [];  // Si no es un arreglo, aseguramos que sea vacío
+                    }
+                    renderCart();  // Llamamos a la función para renderizar los productos del carrito
+                })
+                .catch(error => {
+                    Swal.fire({
+                        title: "Error",
+                        text: error.message,
+                        icon: "error",
+                        customClass: {
+                            confirmButton: 'btn btn-primary border-0'
+                        }
+                    });
+                });
+        }
+
+        // Función para renderizar los productos del carrito
+        function renderCart() {
+            const cartContainer = document.getElementById('cartItems');
+
+            if (cartProducts.length === 0) {
+                cartContainer.innerHTML = `
+                    <div class="empty-cart">
+                        <div class="empty-cart-icon">🛒</div>
+                        <h3>Tu carrito está vacío</h3>
+                        <p>¡Agrega algunos productos desde nuestra sección de cotización!</p>
+                        <a href="cotizacion.html" class="btn btn-checkout mt-3">Ir a Cotización</a>
+                    </div>
+                `;
+                updateTotals();
+                return;
+            }
+
+            cartContainer.innerHTML = cartProducts.map(product => `
+                <div class="cart-item">
+                    <div class="row align-items-center">
+                        <div class="col-md-2">
+                            <img src="${product.imagen}" alt="${product.modelo}" class="img-fluid">
+                        </div>
+                        <div class="col-md-4">
+                            <h5>${product.marca}</h5>
+                            <p class="text-muted mb-0">Precio unitario: $${product.precio.toFixed(2)}</p>
+                        </div>
+                        <div class="col-md-2">
+                            <strong>$${(product.precio * product.cantidad).toFixed(2)}</strong>
+                        </div>
+                        <div class="col-md-1">
+                            <button class="btn-remove" onclick="removeProduct(${product.codigo})">🗑️</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            updateTotals();
+        }
+
+        // Función para actualizar los totales (subtotal, impuestos y total)
+        function updateTotals() {
+            const subtotal = cartProducts.reduce((total, product) => total + (product.precio * product.cantidad), 0);
+            const tax = subtotal * 0.16;
+            const total = subtotal + tax;
+
+            document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById('tax').textContent = `$${tax.toFixed(2)}`;
+            document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+        }
+
+        // Función para eliminar un producto del carrito
+        function removeProduct(productId) {
+            if (confirm('¿Estás seguro de que deseas eliminar este producto?')) {
+                fetch(`../carrito/producto/${productId}`, {
+                    method: "DELETE",
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            cartProducts = cartProducts.filter(product => product.codigo !== productId);
+                            renderCart();
+                        } else {
+                            throw new Error("Error al eliminar producto");
+                        }
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            title: "Error",
+                            text: error.message,
+                            icon: "error",
+                            customClass: {
+                                confirmButton: 'btn btn-primary border-0'
+                            }
+                        });
+                    });
+            }
+        }
+
+        // Función para proceder al pago
+        function checkout() {
+            if (cartProducts.length === 0) {
+                alert('Tu carrito está vacío');
+                return;
+            }
+            alert('Procediendo al pago...');
+            // Aquí iría la lógica de redirección al checkout
+        }
+
+        // Llamada inicial para cargar los productos del carrito al cargar la página
+        window.onload = obtenerCarrito;
+    </script> -->
+    <script src="../js/carritoController.js"></script>
+
 </body>
 
 </html>
