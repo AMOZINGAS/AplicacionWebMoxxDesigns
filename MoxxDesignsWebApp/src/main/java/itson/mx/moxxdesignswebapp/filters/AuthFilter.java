@@ -55,7 +55,7 @@ public class AuthFilter implements Filter {
         if (token == null) {
             // Si no se encuentra la cookie, retornar 401
             
-            if(path.endsWith("/carrito.html")) {
+            if(path.endsWith("/carrito.html") || path.endsWith("/ver-pedidos.html")) {
                 res.sendRedirect("/MoxxDesignsWebApp/pages/login-necesario.html") ;
             }
             
